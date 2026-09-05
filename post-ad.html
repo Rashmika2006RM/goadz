@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Your Ad - go PAGEZ</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/logo.png">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Animation CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-light">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-3">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="images/logo.png" alt="go PAGEZ" style="height:38px; width:auto; object-fit:contain;">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item me-2">
+                        <a class="nav-link text-dark fw-semibold" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item me-2">
+                        <a class="nav-link text-dark fw-semibold" href="all-ads.html">Browse Ads</a>
+                    </li>
+                    <li class="nav-item me-2">
+                        <a class="nav-link text-dark" href="admin-panel.html">Admin</a>
+                    </li>
+                    <li class="nav-item me-2">
+                        <button class="theme-toggle-btn" id="darkModeToggle" title="Toggle Dark/Light Mode">
+                            <i class="fa-solid fa-moon" id="themeIcon"></i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <section class="bg-white border-bottom py-4 mb-4">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h2 class="fw-bold text-dark mb-1">Post a New Ad</h2>
+                    <p class="text-muted mb-0">Fill in the details below to publish your listing across our network.</p>
+                </div>
+                <div class="col-md-4 text-md-end mt-3 mt-md-0">
+                    <a href="index.html" class="btn btn-outline-secondary btn-sm">
+                        <i class="fa-solid fa-arrow-left me-1"></i> Back to Home
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Container -->
+    <main class="container pb-5">
+        <form action="#" method="POST" enctype="multipart/form-data" id="postAdForm">
+            <div class="row g-4">
+                
+                <!-- Left Column: Ad Details & Images -->
+                <div class="col-lg-8" data-aos="fade-up">
+                    
+                    <!-- Item / Product Details Card -->
+                    <div class="card border-0 shadow-sm mb-4">
+                        <div class="card-header bg-white py-3 border-0">
+                            <h5 class="fw-bold mb-0 text-primary">
+                                <i class="fa-solid fa-tag me-2"></i>1. Item Details
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            
+                            <!-- Category Selection -->
+                            <div class="row g-3 mb-3">
+                                <div class="col-md-6">
+                                    <label for="category" class="form-label fw-semibold">Category <span class="text-danger">*</span></label>
+                                    <select class="form-select" id="category" required>
+                                        <option value="" selected disabled>Select Category</option>
+                                        <option value="cars">Cars & Vehicles</option>
+                                        <option value="property">Property & Real Estate</option>
+                                        <option value="electronics">Electronics & Gadgets</option>
+                                        <option value="jobs">Jobs & Services</option>
+                                        <option value="mobile">Mobile Phones & Accessories</option>
+                                        <option value="fashion">Fashion & Health</option>
+                                        <option value="pets">Pets & Animals</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="subcategory" class="form-label fw-semibold">Subcategory</label>
+                                    <select class="form-select" id="subcategory">
+                                        <option value="" selected disabled>Select Subcategory</option>
+                                        <!-- Populated via JS based on category -->
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Ad Title -->
+                            <div class="mb-3">
+                                <label for="adTitle" class="form-label fw-semibold">Ad Title <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="adTitle" placeholder="e.g. Toyota Prius 2018 Low Mileage Excellent Condition" required maxlength="100">
+                                <div class="form-text">Keep it descriptive to get up to 5x more responses.</div>
+                            </div>
+
+                            <!-- Condition & Price -->
+                            <div class="row g-3 mb-3">
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold d-block">Condition <span class="text-danger">*</span></label>
+                                    <div class="btn-group w-100" role="group">
+                                        <input type="radio" class="btn-check" name="itemCondition" id="condUsed" value="used" checked>
+                                        <label class="btn btn-outline-primary" for="condUsed">Used</label>
+                                        
+                                        <input type="radio" class="btn-check" name="itemCondition" id="condNew" value="new">
+                                        <label class="btn btn-outline-primary" for="condNew">Brand New</label>
+                                        
+                                        <input type="radio" class="btn-check" name="itemCondition" id="condReconditioned" value="reconditioned">
+                                        <label class="btn btn-outline-primary" for="condReconditioned">Reconditioned</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <label for="price" class="form-label fw-semibold">Price (LKR / USD) <span class="text-danger">*</span></label>
+                                    <div class="input-group">
+                                        <span class="input-group-text fw-bold">Rs.</span>
+                                        <input type="number" class="form-control" id="price" placeholder="0.00" required>
+                                    </div>
+                                    <div class="form-check mt-2">
+                                        <input class="form-check-input" type="checkbox" id="negotiable">
+                                        <label class="form-check-label text-muted small" for="negotiable">
+                                            Price is Negotiable
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Description -->
+                            <div class="mb-3">
+                                <label for="description" class="form-label fw-semibold">Description <span class="text-danger">*</span></label>
+                                <textarea class="form-control" id="description" rows="5" placeholder="Mention key specifications, defects (if any), reason for sale, and maintenance history..." required></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Photo Upload Card -->
+                    <div class="card border-0 shadow-sm mb-4">
+                        <div class="card-header bg-white py-3 border-0">
+                            <h5 class="fw-bold mb-0 text-primary">
+                                <i class="fa-solid fa-images me-2"></i>2. Upload Photos
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="border border-2 border-dashed rounded p-4 text-center bg-white" id="imageDropzone">
+                                <i class="fa-solid fa-cloud-arrow-up fs-1 text-primary mb-3"></i>
+                                <h5>Drag and drop images here</h5>
+                                <p class="text-muted small">Supports PNG, JPG, JPEG up to 5MB each (Max 10 photos)</p>
+                                <label for="imageUpload" class="btn btn-outline-primary btn-sm px-4">
+                                    <i class="fa-solid fa-folder-open me-1"></i> Browse Files
+                                </label>
+                                <input type="file" id="imageUpload" multiple accept="image/*" class="d-none">
+                            </div>
+
+                            <!-- Image Preview Container -->
+                            <div id="imagePreview" class="row row-cols-3 row-cols-md-5 g-2 mt-3">
+                                <!-- JS handles dynamically adding thumbnails here -->
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Right Column: Advertiser Details & Promotion Options -->
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                    
+                    <!-- Advertiser Details Card -->
+                    <div class="card border-0 shadow-sm mb-4">
+                        <div class="card-header bg-white py-3 border-0">
+                            <h5 class="fw-bold mb-0 text-primary">
+                                <i class="fa-solid fa-address-card me-2"></i>3. Advertiser Info
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            
+                            <!-- Advertiser Name -->
+                            <div class="mb-3">
+                                <label for="sellerName" class="form-label fw-semibold">Full Name / Business Name <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fa-solid fa-user text-muted"></i></span>
+                                    <input type="text" class="form-control" id="sellerName" placeholder="e.g. John Doe" required>
+                                </div>
+                            </div>
+
+                            <!-- Primary Phone Number -->
+                            <div class="mb-3">
+                                <label for="sellerPhone" class="form-label fw-semibold">Phone Number <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fa-solid fa-phone text-muted"></i></span>
+                                    <input type="tel" class="form-control" id="sellerPhone" placeholder="e.g. +94 77 123 4567" required>
+                                </div>
+                                <div class="form-check mt-1">
+                                    <input class="form-check-input" type="checkbox" id="hidePhone">
+                                    <label class="form-check-label text-muted small" for="hidePhone">
+                                        Hide phone number on published ad
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- WhatsApp Number -->
+                            <div class="mb-3">
+                                <label for="sellerWhatsapp" class="form-label fw-semibold">WhatsApp Number</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fa-brands fa-whatsapp text-success"></i></span>
+                                    <input type="tel" class="form-control" id="sellerWhatsapp" placeholder="e.g. +94 77 123 4567">
+                                </div>
+                                <div class="form-check mt-1">
+                                    <input class="form-check-input" type="checkbox" id="sameAsPhone">
+                                    <label class="form-check-label text-muted small" for="sameAsPhone">
+                                        Same as primary phone number
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Email Address -->
+                            <div class="mb-3">
+                                <label for="sellerEmail" class="form-label fw-semibold">Email Address <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fa-solid fa-envelope text-muted"></i></span>
+                                    <input type="email" class="form-control" id="sellerEmail" placeholder="name@example.com" required>
+                                </div>
+                            </div>
+
+                            <!-- District / Region -->
+                            <div class="mb-3">
+                                <label for="district" class="form-label fw-semibold">District / Province <span class="text-danger">*</span></label>
+                                <select class="form-select" id="district" required>
+                                    <option value="" selected disabled>Select District</option>
+                                    <option value="colombo">Colombo</option>
+                                    <option value="gampaha">Gampaha</option>
+                                    <option value="kandy">Kandy</option>
+                                    <option value="galle">Galle</option>
+                                    <option value="kurunegala">Kurunegala</option>
+                                </select>
+                            </div>
+
+                            <!-- City / Town -->
+                            <div class="mb-3">
+                                <label for="city" class="form-label fw-semibold">City / Specific Area <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fa-solid fa-location-dot text-muted"></i></span>
+                                    <input type="text" class="form-control" id="city" placeholder="e.g. Nugegoda, Colombo 05" required>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Promote Options (ikman/OLX Style) -->
+                    <div class="card border-0 shadow-sm mb-4">
+                        <div class="card-header bg-white py-3 border-0">
+                            <h5 class="fw-bold mb-0 text-primary">
+                                <i class="fa-solid fa-rocket me-2"></i>4. Promote Listing
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-check border rounded p-3 mb-2 bg-light">
+                                <input class="form-check-input" type="radio" name="adPackage" id="pkgFree" value="free" checked>
+                                <label class="form-check-label fw-bold d-block" for="pkgFree">
+                                    Regular Listing <span class="badge bg-secondary float-end">Free</span>
+                                </label>
+                                <span class="text-muted small">Standard visibility in browse & search queries.</span>
+                            </div>
+
+                            <div class="form-check border border-warning rounded p-3 bg-warning bg-opacity-10">
+                                <input class="form-check-input" type="radio" name="adPackage" id="pkgFeatured" value="featured">
+                                <label class="form-check-label fw-bold d-block" for="pkgFeatured">
+                                    Featured Ad <span class="badge bg-warning text-dark float-end">Rs. 1,500</span>
+                                </label>
+                                <span class="text-muted small">Displayed on the home page top banner for 7 days.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary btn-lg fw-bold shadow">
+                            <i class="fa-solid fa-paper-plane me-2"></i> Publish Ad Now
+                        </button>
+                        <p class="text-muted text-center small mt-2">
+                            By clicking "Publish Ad Now", you agree to our <a href="#" class="text-decoration-none">Terms & Conditions</a>.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+        </form>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 mt-auto">
+        <div class="container text-center">
+            <p class="mb-0">&copy; 2026 go PAGEZ. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS Animation JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Custom JS App Script -->
+    <script src="js/app.js"></script>
+    
+    <!-- Client-side Logic Script -->
+    <script>
+        AOS.init({ duration: 600, once: true });
+
+        // Quick JS: Automatically copy Phone to WhatsApp if checkbox is checked
+        const sameAsPhoneCheckbox = document.getElementById('sameAsPhone');
+        if (sameAsPhoneCheckbox) {
+            sameAsPhoneCheckbox.addEventListener('change', function() {
+                const phoneInput = document.getElementById('sellerPhone');
+                const whatsappInput = document.getElementById('sellerWhatsapp');
+                if (this.checked && phoneInput && whatsappInput) {
+                    whatsappInput.value = phoneInput.value;
+                }
+            });
+        }
+    </script>
+</body>
+</html>

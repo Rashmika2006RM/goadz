@@ -1,0 +1,6 @@
+/* Responsive styles for go PAGEZ */
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 40px 0 60px;
+    }
+}

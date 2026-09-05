@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account &amp; Advertiser Profile - go PAGEZ</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/logo.png">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Animation CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-body d-flex flex-column min-vh-100">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary shadow-sm py-3 sticky-top border-bottom">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+                <img src="images/logo.png" alt="go PAGEZ" style="height:38px; width:auto; object-fit:contain;">
+            </a>
+            <div class="d-flex align-items-center gap-3">
+                <button class="theme-toggle-btn" id="darkModeToggle" title="Toggle Dark/Light Mode">
+                    <i class="fa-solid fa-moon" id="themeIcon"></i>
+                </button>
+                <div>
+                    <span class="text-muted small me-2 d-none d-sm-inline">Already have an account?</span>
+                    <a href="login.html" class="btn btn-outline-primary btn-sm fw-bold">Login</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Registration Section -->
+    <main class="container py-5 flex-grow-1">
+        <div class="row justify-content-center">
+            <div class="col-lg-9 col-xl-8" data-aos="fade-up">
+                
+                <div class="auth-card p-4 p-md-5">
+                    
+                    <div class="text-center mb-4">
+                        <span class="badge bg-primary-subtle text-primary fw-bold px-3 py-1.5 rounded-pill mb-2">
+                            <i class="fa-solid fa-user-plus me-1"></i> Join go PAGEZ
+                        </span>
+                        <h2 class="fw-bold text-body display-7 mb-1">Create Your Account</h2>
+                        <p class="text-muted small">Join thousands of verified buyers, private sellers, and business advertisers today.</p>
+                    </div>
+
+                    <!-- Social Sign-up Buttons -->
+                    <div class="row g-2 mb-4">
+                        <div class="col-6">
+                            <button type="button" class="btn btn-google w-100 py-2 d-flex align-items-center justify-content-center gap-2 shadow-sm rounded-3" data-bs-toggle="modal" data-bs-target="#googleOAuthModal">
+                                <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17Z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.34 24 12 24Z"/><path fill="#FBBC05" d="M5.28 14.27A7.16 7.16 0 0 1 4.9 12c0-.79.14-1.57.38-2.27V6.58H1.25A11.96 11.96 0 0 0 0 12c0 1.92.45 3.74 1.25 5.42l4.03-3.15Z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.34 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98Z"/></svg>
+                                <span class="small fw-semibold">Sign up with Google</span>
+                            </button>
+                        </div>
+                        <div class="col-6">
+                            <button type="button" class="btn btn-facebook w-100 py-2 d-flex align-items-center justify-content-center gap-2 shadow-sm rounded-3" data-bs-toggle="modal" data-bs-target="#facebookOAuthModal">
+                                <i class="fa-brands fa-facebook fs-6"></i>
+                                <span class="small fw-semibold">Sign up with Facebook</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="position-relative text-center my-4">
+                        <hr class="border-secondary-subtle">
+                        <span class="position-absolute top-50 start-50 translate-middle bg-body px-3 text-muted small">or register with email</span>
+                    </div>
+
+                    <form id="registerForm" onsubmit="handleRegisterSubmit(event)">
+                        
+                        <!-- Account Type Selection -->
+                        <div class="mb-4">
+                            <label class="form-label fw-bold small text-body mb-2">1. Select Account Type</label>
+                            <div class="row g-3">
+                                <div class="col-6">
+                                    <input type="radio" class="btn-check" name="accountType" id="typePersonal" value="personal" checked autocomplete="off">
+                                    <label class="btn btn-outline-primary w-100 py-3 d-flex flex-column align-items-center h-100 rounded-3 text-start" for="typePersonal">
+                                        <i class="fa-solid fa-user fs-3 mb-2 text-primary"></i>
+                                        <span class="fw-bold fs-6">Individual / Seller</span>
+                                        <small class="text-muted fw-normal" style="font-size:11px;">Buy, sell &amp; post personal ads</small>
+                                    </label>
+                                </div>
+                                <div class="col-6">
+                                    <input type="radio" class="btn-check" name="accountType" id="typeBusiness" value="business" autocomplete="off">
+                                    <label class="btn btn-outline-primary w-100 py-3 d-flex flex-column align-items-center h-100 rounded-3 text-start" for="typeBusiness">
+                                        <i class="fa-solid fa-store fs-3 mb-2 text-primary"></i>
+                                        <span class="fw-bold fs-6">Advertiser / Business</span>
+                                        <small class="text-muted fw-normal" style="font-size:11px;">Dealers, stores &amp; corporate agencies</small>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="my-4 border-secondary-subtle">
+
+                        <!-- Section 2: Basic Account Information -->
+                        <div class="d-flex align-items-center gap-2 mb-3">
+                            <i class="fa-solid fa-id-card text-primary"></i>
+                            <h6 class="fw-bold text-body mb-0">2. Basic Account Information</h6>
+                        </div>
+                        
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-6">
+                                <label for="fullName" class="form-label small fw-semibold text-body">Full Name / Contact Person <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control bg-body-tertiary" id="fullName" placeholder="e.g. Kasun Perera" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="email" class="form-label small fw-semibold text-body">Email Address <span class="text-danger">*</span></label>
+                                <input type="email" class="form-control bg-body-tertiary" id="email" placeholder="kasun@example.com" required>
+                            </div>
+                        </div>
+
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-6">
+                                <label for="phone" class="form-label small fw-semibold text-body">Phone / WhatsApp Number <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-body-tertiary text-muted small">+94</span>
+                                    <input type="tel" class="form-control bg-body-tertiary" id="phone" placeholder="77 123 4567" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="location" class="form-label small fw-semibold text-body">Primary City / District <span class="text-danger">*</span></label>
+                                <select class="form-select bg-body-tertiary" id="location" required>
+                                    <option value="" selected disabled>Select City / District</option>
+                                    <option value="Colombo">Colombo</option>
+                                    <option value="Gampaha">Gampaha</option>
+                                    <option value="Kandy">Kandy</option>
+                                    <option value="Galle">Galle</option>
+                                    <option value="Kurunegala">Kurunegala</option>
+                                    <option value="Negombo">Negombo</option>
+                                    <option value="Kalutara">Kalutara</option>
+                                    <option value="Matara">Matara</option>
+                                    <option value="Anuradhapura">Anuradhapura</option>
+                                    <option value="Jaffna">Jaffna</option>
+                                    <option value="Batticaloa">Batticaloa</option>
+                                    <option value="Ratnapura">Ratnapura</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Section 3: Advertiser & Business Details (Dynamically Toggled) -->
+                        <div id="advertiserSection" class="p-3 p-md-4 rounded-3 border bg-body-tertiary my-4" style="display: none;">
+                            <div class="d-flex align-items-center gap-2 mb-3">
+                                <i class="fa-solid fa-briefcase text-primary"></i>
+                                <h6 class="fw-bold text-body mb-0">3. Advertiser &amp; Business Profile</h6>
+                            </div>
+                            
+                            <div class="row g-3 mb-3">
+                                <div class="col-md-6">
+                                    <label for="companyName" class="form-label small fw-semibold text-body">Business / Company Name <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control bg-body" id="companyName" placeholder="e.g. Premier Auto Trading">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="businessCategory" class="form-label small fw-semibold text-body">Industry Category <span class="text-danger">*</span></label>
+                                    <select class="form-select bg-body" id="businessCategory">
+                                        <option value="" selected disabled>Select Industry</option>
+                                        <option value="Automotive & Dealership">Automotive &amp; Dealership</option>
+                                        <option value="Real Estate & Property">Real Estate &amp; Property Agency</option>
+                                        <option value="Electronics & Retail">Electronics &amp; Retail Store</option>
+                                        <option value="Professional Services">Professional Services</option>
+                                        <option value="Fashion & Apparel">Fashion &amp; Apparel</option>
+                                        <option value="Jobs & Recruitment">Jobs &amp; Recruitment Agency</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row g-3 mb-3">
+                                <div class="col-md-6">
+                                    <label for="taxRegNo" class="form-label small fw-semibold text-body">BR / TAX Number <small class="text-muted">(Optional)</small></label>
+                                    <input type="text" class="form-control bg-body" id="taxRegNo" placeholder="e.g. PV-123456">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="website" class="form-label small fw-semibold text-body">Website / Social Page <small class="text-muted">(Optional)</small></label>
+                                    <input type="url" class="form-control bg-body" id="website" placeholder="https://www.yourcompany.com">
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="businessAddress" class="form-label small fw-semibold text-body">Showroom / Office Physical Address</label>
+                                <input type="text" class="form-control bg-body" id="businessAddress" placeholder="e.g. 124 Galle Road, Colombo 03">
+                            </div>
+
+                            <div class="mb-0">
+                                <label for="businessBio" class="form-label small fw-semibold text-body">About Your Business</label>
+                                <textarea class="form-control bg-body" id="businessBio" rows="2" placeholder="Briefly describe what your business offers..."></textarea>
+                            </div>
+                        </div>
+
+                        <hr class="my-4 border-secondary-subtle">
+
+                        <!-- Section 4: Password & Security -->
+                        <div class="d-flex align-items-center gap-2 mb-3">
+                            <i class="fa-solid fa-lock text-primary"></i>
+                            <h6 class="fw-bold text-body mb-0">4. Security &amp; Password</h6>
+                        </div>
+                        
+                        <div class="row g-3 mb-2">
+                            <div class="col-md-6">
+                                <label for="password" class="form-label small fw-semibold text-body">Password <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <input type="password" class="form-control bg-body-tertiary border-end-0" id="password" placeholder="At least 6 characters" required oninput="checkPasswordStrength()">
+                                    <button class="btn password-toggle-btn border" type="button" onclick="togglePasswordVisibility('password', 'togglePassIcon')">
+                                        <i class="fa-regular fa-eye" id="togglePassIcon"></i>
+                                    </button>
+                                </div>
+                                <!-- Password Strength Progress Bar -->
+                                <div class="password-strength-bar">
+                                    <div class="password-strength-progress" id="strengthProgress"></div>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mt-1">
+                                    <small class="text-muted" style="font-size:11px;" id="strengthText">Password Strength: None</small>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="confirmPassword" class="form-label small fw-semibold text-body">Confirm Password <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <input type="password" class="form-control bg-body-tertiary border-end-0" id="confirmPassword" placeholder="Repeat your password" required oninput="checkPasswordMatch()">
+                                    <button class="btn password-toggle-btn border" type="button" onclick="togglePasswordVisibility('confirmPassword', 'toggleConfirmPassIcon')">
+                                        <i class="fa-regular fa-eye" id="toggleConfirmPassIcon"></i>
+                                    </button>
+                                </div>
+                                <div class="mt-1">
+                                    <small id="matchText" class="text-muted" style="font-size:11px;"></small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Terms & Conditions -->
+                        <div class="form-check mb-4 mt-3">
+                            <input class="form-check-input" type="checkbox" id="termsCheck" required checked>
+                            <label class="form-check-label small text-muted" for="termsCheck">
+                                I agree to the <a href="#" class="text-primary text-decoration-none fw-semibold">Terms of Service</a>, <a href="#" class="text-primary text-decoration-none fw-semibold">Privacy Policy</a>, and Safety Guidelines of go PAGEZ.
+                            </label>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" class="btn btn-primary btn-lg w-100 fw-bold py-3 shadow-sm" id="registerSubmitBtn">
+                            <i class="fa-solid fa-user-plus me-2"></i> Complete Account Registration
+                        </button>
+
+                        <p class="text-center text-muted small mt-3 mb-0">
+                            Already registered? 
+                            <a href="login.html" class="text-decoration-none fw-bold text-primary">Log in here</a>
+                        </p>
+
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Google OAuth Account Selection Modal -->
+    <div class="modal fade" id="googleOAuthModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content oauth-modal-content p-4">
+                <div class="d-flex align-items-center justify-content-between mb-3 border-bottom pb-3">
+                    <div class="d-flex align-items-center gap-2">
+                        <svg width="24" height="24" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17Z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.34 24 12 24Z"/><path fill="#FBBC05" d="M5.28 14.27A7.16 7.16 0 0 1 4.9 12c0-.79.14-1.57.38-2.27V6.58H1.25A11.96 11.96 0 0 0 0 12c0 1.92.45 3.74 1.25 5.42l4.03-3.15Z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.34 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98Z"/></svg>
+                        <h6 class="fw-bold mb-0 text-body">Sign up with Google</h6>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                
+                <p class="text-muted small mb-3">Choose an account to create your <strong>go PAGEZ</strong> profile:</p>
+
+                <!-- Accounts List -->
+                <div class="d-flex flex-column gap-2 mb-3">
+                    <div class="oauth-account-item" onclick="selectGoogleRegister('Kasun Perera', 'kasun.perera@gmail.com', 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&q=80')">
+                        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&q=80" alt="Kasun" class="oauth-avatar">
+                        <div class="flex-grow-1">
+                            <div class="fw-bold small text-body">Kasun Perera</div>
+                            <div class="text-muted" style="font-size:12px;">kasun.perera@gmail.com</div>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-muted small"></i>
+                    </div>
+
+                    <div class="oauth-account-item" onclick="selectGoogleRegister('Nuwan Silva', 'nuwan.silva92@gmail.com', 'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=120&q=80')">
+                        <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=120&q=80" alt="Nuwan" class="oauth-avatar">
+                        <div class="flex-grow-1">
+                            <div class="fw-bold small text-body">Nuwan Silva</div>
+                            <div class="text-muted" style="font-size:12px;">nuwan.silva92@gmail.com</div>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-muted small"></i>
+                    </div>
+
+                    <div class="oauth-account-item" onclick="toggleCustomGoogleReg()">
+                        <div class="oauth-avatar d-flex align-items-center justify-content-center bg-body-tertiary border text-muted">
+                            <i class="fa-solid fa-user-plus"></i>
+                        </div>
+                        <div class="flex-grow-1">
+                            <div class="fw-bold small text-body">Use another Google account</div>
+                            <div class="text-muted" style="font-size:12px;">Enter your Gmail address</div>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-muted small"></i>
+                    </div>
+                </div>
+
+                <!-- Custom Google Account input form -->
+                <div id="customGoogleRegInput" class="p-3 bg-body-tertiary rounded-3 border mb-3" style="display:none;">
+                    <label class="form-label small fw-bold text-body">Enter Google / Gmail Account</label>
+                    <div class="input-group mb-2">
+                        <input type="email" class="form-control form-control-sm bg-body" id="customGoogleRegEmail" placeholder="your.name@gmail.com">
+                        <button class="btn btn-primary btn-sm fw-bold px-3" type="button" onclick="submitCustomGoogleReg()">Continue</button>
+                    </div>
+                </div>
+
+                <div class="text-center text-muted" style="font-size:11px;">
+                    By continuing, Google will share your name, email, and profile image with go PAGEZ. See our <a href="#" class="text-primary text-decoration-none">Privacy Policy</a>.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Facebook OAuth Modal -->
+    <div class="modal fade" id="facebookOAuthModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content oauth-modal-content p-4">
+                <div class="d-flex align-items-center justify-content-between mb-3 border-bottom pb-3">
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="fa-brands fa-facebook fs-4" style="color:#1877f2;"></i>
+                        <h6 class="fw-bold mb-0 text-body">Sign up with Facebook</h6>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                
+                <div class="text-center my-3">
+                    <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=160&q=80" alt="FB Avatar" class="rounded-circle shadow-sm border p-1" style="width:72px; height:72px; object-fit:cover;">
+                    <h5 class="fw-bold text-body mt-2 mb-0">Kasun Perera</h5>
+                    <p class="text-muted small">kasun.perera@facebook.com</p>
+                </div>
+
+                <div class="p-3 bg-body-tertiary rounded-3 border mb-3 small text-muted">
+                    <div class="d-flex align-items-center gap-2 mb-1">
+                        <i class="fa-solid fa-circle-check text-success"></i>
+                        <span><strong>go PAGEZ</strong> will receive your public profile and email address to create your account.</span>
+                    </div>
+                </div>
+
+                <div class="d-flex flex-column gap-2 mb-2">
+                    <button type="button" class="btn btn-facebook py-2.5 fw-bold shadow-sm" onclick="selectFacebookRegister('Kasun Perera', 'kasun.perera@facebook.com')">
+                        <i class="fa-brands fa-facebook me-1"></i> Continue as Kasun
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary py-2 btn-sm" onclick="toggleCustomFbReg()">
+                        Use another Facebook account
+                    </button>
+                </div>
+
+                <!-- Custom FB Input -->
+                <div id="customFbRegInput" class="p-3 bg-body-tertiary rounded-3 border my-3" style="display:none;">
+                    <label class="form-label small fw-bold text-body">Facebook Email or Phone</label>
+                    <div class="input-group mb-2">
+                        <input type="text" class="form-control form-control-sm bg-body" id="customFbRegEmail" placeholder="facebook.user@example.com">
+                        <button class="btn btn-primary btn-sm fw-bold px-3" type="button" onclick="submitCustomFbReg()">Sign Up</button>
+                    </div>
+                </div>
+
+                <div class="text-center text-muted mt-2" style="font-size:11px;">
+                    This will not allow go PAGEZ to post to your Facebook timeline.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Registration Success Modal -->
+    <div class="modal fade" id="regSuccessModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg rounded-4 text-center p-4">
+                <div class="modal-body p-3">
+                    <div class="mb-3">
+                        <div class="d-inline-flex align-items-center justify-content-center bg-success-subtle text-success rounded-circle" style="width:70px; height:70px; font-size:32px;">
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+                    </div>
+                    <h4 class="fw-bold text-body mb-2">Account Created Successfully!</h4>
+                    <p class="text-muted small mb-4" id="regSuccessMsg">
+                        Welcome to go PAGEZ. Your account is now active and you are automatically logged in.
+                    </p>
+                    <div class="d-flex flex-column gap-2">
+                        <a href="index.html" class="btn btn-primary fw-bold py-2.5">
+                            <i class="fa-solid fa-house me-1"></i> Go to Homepage
+                        </a>
+                        <a href="post-ad.html" class="btn btn-outline-primary fw-bold py-2">
+                            <i class="fa-solid fa-plus me-1"></i> Post Your First Ad
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-body-tertiary border-top py-4 mt-auto">
+        <div class="container text-center text-muted small">
+            <p class="mb-0">&copy; 2026 go PAGEZ. All rights reserved. | <a href="#" class="text-muted text-decoration-none">Terms</a> | <a href="#" class="text-muted text-decoration-none">Privacy Policy</a></p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- App JS -->
+    <script src="js/app.js"></script>
+    <!-- AOS Animation JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <script>
+        // Initialize AOS animations
+        AOS.init({ duration: 700, once: true });
+
+        // Dynamic Advertiser Details toggle logic
+        const typePersonal = document.getElementById('typePersonal');
+        const typeBusiness = document.getElementById('typeBusiness');
+        const advertiserSection = document.getElementById('advertiserSection');
+
+        function toggleAdvertiserSection() {
+            if (typeBusiness.checked) {
+                advertiserSection.style.display = 'block';
+            } else {
+                advertiserSection.style.display = 'none';
+            }
+        }
+
+        typePersonal.addEventListener('change', toggleAdvertiserSection);
+        typeBusiness.addEventListener('change', toggleAdvertiserSection);
+
+        // Toggle Password Visibility
+        function togglePasswordVisibility(inputId, iconId) {
+            const input = document.getElementById(inputId);
+            const icon = document.getElementById(iconId);
+            if (!input || !icon) return;
+
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.className = 'fa-regular fa-eye-slash';
+            } else {
+                input.type = 'password';
+                icon.className = 'fa-regular fa-eye';
+            }
+        }
+
+        // Live Password Strength Check
+        function checkPasswordStrength() {
+            const pass = document.getElementById('password').value;
+            const bar = document.getElementById('strengthProgress');
+            const text = document.getElementById('strengthText');
+            
+            let score = 0;
+            if (pass.length >= 6) score++;
+            if (pass.length >= 8) score++;
+            if (/[A-Z]/.test(pass)) score++;
+            if (/[0-9]/.test(pass)) score++;
+            if (/[^A-Za-z0-9]/.test(pass)) score++;
+
+            if (score === 0) {
+                bar.style.width = '0%';
+                bar.style.backgroundColor = '';
+                text.textContent = 'Password Strength: None';
+                text.className = 'text-muted';
+            } else if (score <= 2) {
+                bar.style.width = '30%';
+                bar.style.backgroundColor = '#ef4444';
+                text.textContent = 'Password Strength: Weak';
+                text.className = 'text-danger fw-semibold';
+            } else if (score <= 3) {
+                bar.style.width = '65%';
+                bar.style.backgroundColor = '#f59e0b';
+                text.textContent = 'Password Strength: Good';
+                text.className = 'text-warning fw-semibold';
+            } else {
+                bar.style.width = '100%';
+                bar.style.backgroundColor = '#22c55e';
+                text.textContent = 'Password Strength: Strong';
+                text.className = 'text-success fw-semibold';
+            }
+
+            checkPasswordMatch();
+        }
+
+        // Live Password Match Check
+        function checkPasswordMatch() {
+            const pass = document.getElementById('password').value;
+            const confirm = document.getElementById('confirmPassword').value;
+            const matchText = document.getElementById('matchText');
+
+            if (!confirm) {
+                matchText.textContent = '';
+                return;
+            }
+
+            if (pass === confirm) {
+                matchText.innerHTML = '<i class="fa-solid fa-check text-success me-1"></i> Passwords match';
+                matchText.className = 'text-success fw-semibold';
+            } else {
+                matchText.innerHTML = '<i class="fa-solid fa-xmark text-danger me-1"></i> Passwords do not match';
+                matchText.className = 'text-danger fw-semibold';
+            }
+        }
+
+        // Handle Registration Submit
+        function handleRegisterSubmit(event) {
+            event.preventDefault();
+            
+            const fullName = document.getElementById('fullName').value.trim();
+            const email = document.getElementById('email').value.trim().toLowerCase();
+            const phone = document.getElementById('phone').value.trim();
+            const location = document.getElementById('location').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const isBusiness = document.getElementById('typeBusiness').checked;
+            const alertBox = document.getElementById('registerAlert');
+            const submitBtn = document.getElementById('registerSubmitBtn');
+
+            // Validation
+            if (password !== confirmPassword) {
+                showAlert(alertBox, 'danger', '<i class="fa-solid fa-triangle-exclamation me-1"></i> Passwords do not match. Please verify your password.');
+                return;
+            }
+
+            if (password.length < 6) {
+                showAlert(alertBox, 'danger', '<i class="fa-solid fa-triangle-exclamation me-1"></i> Password must be at least 6 characters long.');
+                return;
+            }
+
+            // Check if user already exists
+            const db = JSON.parse(localStorage.getItem('classifiedDB') || '{"users":[]}');
+            if (!db.users) db.users = [];
+
+            const existingUser = db.users.find(u => u.email && u.email.toLowerCase() === email);
+            if (existingUser) {
+                showAlert(alertBox, 'warning', `<i class="fa-solid fa-circle-exclamation me-1"></i> An account with email <strong>${email}</strong> already exists. <a href="login.html" class="alert-link">Log in instead?</a>`);
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span> Creating Account...';
+
+            setTimeout(() => {
+                const newUser = {
+                    id: Date.now(),
+                    name: fullName,
+                    email: email,
+                    username: email.split('@')[0],
+                    phone: phone.startsWith('0') ? phone : ('0' + phone),
+                    location: location,
+                    password: password,
+                    accountType: isBusiness ? 'business' : 'personal',
+                    role: isBusiness ? 'Advertiser' : 'Member',
+                    companyName: isBusiness ? (document.getElementById('companyName').value.trim() || fullName) : '',
+                    businessCategory: isBusiness ? document.getElementById('businessCategory').value : '',
+                    taxRegNo: isBusiness ? document.getElementById('taxRegNo').value.trim() : '',
+                    website: isBusiness ? document.getElementById('website').value.trim() : '',
+                    businessAddress: isBusiness ? document.getElementById('businessAddress').value.trim() : '',
+                    businessBio: isBusiness ? document.getElementById('businessBio').value.trim() : '',
+                    createdAt: new Date().toISOString()
+                };
+
+                db.users.push(newUser);
+                localStorage.setItem('classifiedDB', JSON.stringify(db));
+
+                // Auto login
+                localStorage.setItem('currentUser', JSON.stringify(newUser));
+
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fa-solid fa-user-plus me-2"></i> Complete Account Registration';
+
+                // Show Success Modal
+                document.getElementById('regSuccessMsg').textContent = `Welcome, ${fullName}! Your ${isBusiness ? 'Advertiser' : 'Member'} account has been set up.`;
+                const successModal = new bootstrap.Modal(document.getElementById('regSuccessModal'));
+                successModal.show();
+            }, 600);
+        }
+
+        // Google Registration Handler
+        function selectGoogleRegister(name, email, avatar) {
+            const modalEl = document.getElementById('googleOAuthModal');
+            if (modalEl) {
+                const modal = bootstrap.Modal.getInstance(modalEl);
+                if (modal) modal.hide();
+            }
+
+            const alertBox = document.getElementById('registerAlert');
+            if (alertBox) showAlert(alertBox, 'info', `<i class="fa-solid fa-spinner fa-spin me-1"></i> Creating account via Google as <strong>${name}</strong>...`);
+
+            setTimeout(() => {
+                const isBusiness = document.getElementById('typeBusiness') ? document.getElementById('typeBusiness').checked : false;
+                const googleUser = {
+                    id: Date.now(),
+                    name: name,
+                    email: email,
+                    username: email.split('@')[0],
+                    role: isBusiness ? 'Advertiser' : 'Member',
+                    accountType: isBusiness ? 'business' : 'personal',
+                    provider: 'Google',
+                    location: 'Colombo',
+                    avatar: avatar || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&q=80',
+                    createdAt: new Date().toISOString()
+                };
+
+                const db = JSON.parse(localStorage.getItem('classifiedDB') || '{"users":[]}');
+                if (!db.users) db.users = [];
+                
+                // Add if not existing
+                const idx = db.users.findIndex(u => u.email === email);
+                if (idx >= 0) {
+                    db.users[idx] = googleUser;
+                } else {
+                    db.users.push(googleUser);
+                }
+                localStorage.setItem('classifiedDB', JSON.stringify(db));
+                localStorage.setItem('currentUser', JSON.stringify(googleUser));
+
+                document.getElementById('regSuccessMsg').textContent = `Welcome, ${name}! Your account has been registered via Google and you are automatically logged in.`;
+                const successModal = new bootstrap.Modal(document.getElementById('regSuccessModal'));
+                successModal.show();
+            }, 700);
+        }
+
+        function toggleCustomGoogleReg() {
+            const el = document.getElementById('customGoogleRegInput');
+            el.style.display = el.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function submitCustomGoogleReg() {
+            const email = document.getElementById('customGoogleRegEmail').value.trim();
+            if (!email || !email.includes('@')) {
+                alert('Please enter a valid Google email address.');
+                return;
+            }
+            const name = email.split('@')[0].replace(/[._-]/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+            selectGoogleRegister(name, email, 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&q=80');
+        }
+
+        // Facebook Registration Handler
+        function selectFacebookRegister(name, email) {
+            const modalEl = document.getElementById('facebookOAuthModal');
+            if (modalEl) {
+                const modal = bootstrap.Modal.getInstance(modalEl);
+                if (modal) modal.hide();
+            }
+
+            const alertBox = document.getElementById('registerAlert');
+            if (alertBox) showAlert(alertBox, 'info', `<i class="fa-solid fa-spinner fa-spin me-1"></i> Creating account via Facebook as <strong>${name}</strong>...`);
+
+            setTimeout(() => {
+                const isBusiness = document.getElementById('typeBusiness') ? document.getElementById('typeBusiness').checked : false;
+                const fbUser = {
+                    id: Date.now(),
+                    name: name,
+                    email: email,
+                    username: email.split('@')[0],
+                    role: isBusiness ? 'Advertiser' : 'Member',
+                    accountType: isBusiness ? 'business' : 'personal',
+                    provider: 'Facebook',
+                    location: 'Colombo',
+                    avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&q=80',
+                    createdAt: new Date().toISOString()
+                };
+
+                const db = JSON.parse(localStorage.getItem('classifiedDB') || '{"users":[]}');
+                if (!db.users) db.users = [];
+                const idx = db.users.findIndex(u => u.email === email);
+                if (idx >= 0) {
+                    db.users[idx] = fbUser;
+                } else {
+                    db.users.push(fbUser);
+                }
+                localStorage.setItem('classifiedDB', JSON.stringify(db));
+                localStorage.setItem('currentUser', JSON.stringify(fbUser));
+
+                document.getElementById('regSuccessMsg').textContent = `Welcome, ${name}! Your account has been registered via Facebook and you are automatically logged in.`;
+                const successModal = new bootstrap.Modal(document.getElementById('regSuccessModal'));
+                successModal.show();
+            }, 700);
+        }
+
+        function toggleCustomFbReg() {
+            const el = document.getElementById('customFbRegInput');
+            el.style.display = el.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function submitCustomFbReg() {
+            const email = document.getElementById('customFbRegEmail').value.trim();
+            if (!email) {
+                alert('Please enter your Facebook email or phone number.');
+                return;
+            }
+            const name = email.includes('@') ? email.split('@')[0].replace(/[._-]/g, ' ') : 'Facebook User';
+            selectFacebookRegister(name, email);
+        }
+
+        // Helper Alert
+        function showAlert(box, type, html) {
+            box.className = `alert alert-${type} rounded-3 py-2 px-3 mb-4 small d-block`;
+            box.innerHTML = html;
+        }
+    </script>
+</body>
+</html>

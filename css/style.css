@@ -1,0 +1,482 @@
+/* ======================================================
+   go PAGEZ - Official Brand Stylesheet & Color Theme
+   Primary: #FA7B17 (Vibrant Orange)
+   Secondary: #1E4BB8 (Royal Blue)
+   Dark: #0F172A (Navy Slate)
+   ====================================================== */
+
+:root {
+    --brand: #FA7B17;
+    --brand-primary: #FA7B17;
+    --brand-hover: #E0680A;
+    --brand-blue: #1E4BB8;
+    --brand-blue-hover: #153A94;
+    --brand-dark: #0F172A;
+    --brand-light: #FFF7ED;
+    --font: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+
+    /* Bootstrap 5 variable overrides */
+    --bs-primary: #FA7B17;
+    --bs-primary-rgb: 250, 123, 23;
+    --bs-link-color: #FA7B17;
+    --bs-link-hover-color: #E0680A;
+}
+
+/* ======================================================
+   LIGHT THEME VARIABLES & OVERRIDES
+   ====================================================== */
+[data-bs-theme="light"], :root {
+    --bg-main: #f8fafc;
+    --bg-card: #ffffff;
+    --bg-navbar: #ffffff;
+    --border-color: #e2e8f0;
+    --text-heading: #0f172a;
+    --text-body: #334155;
+    --text-muted: #64748b;
+    --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* ======================================================
+   DARK THEME VARIABLES & OVERRIDES
+   ====================================================== */
+[data-bs-theme="dark"] {
+    --bg-main: #0b1120;
+    --bg-card: #1e293b;
+    --bg-navbar: #0f172a;
+    --border-color: #334155;
+    --text-heading: #f8fafc;
+    --text-body: #cbd5e1;
+    --text-muted: #94a3b8;
+    --card-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+}
+
+[data-bs-theme="dark"] body {
+    background-color: var(--bg-main) !important;
+    color: var(--text-body) !important;
+}
+
+[data-bs-theme="dark"] .bg-light,
+[data-bs-theme="dark"] .bg-body-tertiary {
+    background-color: var(--bg-main) !important;
+}
+
+[data-bs-theme="dark"] .bg-white,
+[data-bs-theme="dark"] .card {
+    background-color: var(--bg-card) !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-body) !important;
+}
+
+[data-bs-theme="dark"] .navbar-light,
+[data-bs-theme="dark"] .navbar.bg-white {
+    background-color: var(--bg-navbar) !important;
+    border-color: var(--border-color) !important;
+}
+
+[data-bs-theme="dark"] .nav-link,
+[data-bs-theme="dark"] .navbar-brand,
+[data-bs-theme="dark"] .text-dark {
+    color: var(--text-heading) !important;
+}
+
+[data-bs-theme="dark"] .form-control,
+[data-bs-theme="dark"] .form-select {
+    background-color: #111827 !important;
+    border-color: var(--border-color) !important;
+    color: #f8fafc !important;
+}
+
+[data-bs-theme="dark"] .form-control::placeholder {
+    color: #64748b !important;
+}
+
+[data-bs-theme="dark"] .border,
+[data-bs-theme="dark"] .border-bottom,
+[data-bs-theme="dark"] .border-top {
+    border-color: var(--border-color) !important;
+}
+
+[data-bs-theme="dark"] .list-group-item {
+    background-color: var(--bg-card) !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-body) !important;
+}
+
+body {
+    font-family: var(--font);
+    transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* Primary Button & Outline Overrides */
+.btn-primary {
+    background-color: var(--brand) !important;
+    border-color: var(--brand) !important;
+    color: #ffffff !important;
+}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active {
+    background-color: var(--brand-hover) !important;
+    border-color: var(--brand-hover) !important;
+    color: #ffffff !important;
+}
+
+.btn-outline-primary {
+    color: var(--brand) !important;
+    border-color: var(--brand) !important;
+}
+.btn-outline-primary:hover, .btn-outline-primary:focus, .btn-outline-primary:active {
+    background-color: var(--brand) !important;
+    border-color: var(--brand) !important;
+    color: #ffffff !important;
+}
+
+.btn-blue {
+    background-color: var(--brand-blue) !important;
+    border-color: var(--brand-blue) !important;
+    color: #ffffff !important;
+}
+.btn-blue:hover {
+    background-color: var(--brand-blue-hover) !important;
+    border-color: var(--brand-blue-hover) !important;
+}
+
+/* Theme Toggle Button */
+.theme-toggle-btn {
+    border: none;
+    background: transparent;
+    color: inherit;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+.theme-toggle-btn:hover {
+    background-color: rgba(250, 123, 23, 0.12);
+    color: var(--brand) !important;
+    transform: rotate(15deg) scale(1.08);
+}
+
+/* Brand Text & Background Utilities */
+.text-primary {
+    color: var(--brand) !important;
+}
+.text-brand-blue {
+    color: var(--brand-blue) !important;
+}
+.bg-primary {
+    background-color: var(--brand) !important;
+}
+.bg-primary-subtle {
+    background-color: rgba(250, 123, 23, 0.12) !important;
+    color: var(--brand) !important;
+}
+
+/* Price Tags & Accents */
+.price-tag {
+    color: var(--brand) !important;
+    font-weight: 700;
+}
+.badge-featured {
+    background: linear-gradient(135deg, #FA7B17, #F59E0B) !important;
+    color: #ffffff !important;
+}
+.badge-sponsored {
+    background: linear-gradient(135deg, #1E4BB8, #2563EB) !important;
+    color: #ffffff !important;
+}
+
+/* Logo Image Styling */
+.site-logo-img {
+    height: 42px;
+    width: auto;
+    object-fit: contain;
+    display: inline-block;
+    vertical-align: middle;
+}
+.footer-logo-img {
+    height: 38px;
+    width: auto;
+    object-fit: contain;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 3px 8px;
+    border-radius: 6px;
+}
+
+/* ======================================================
+   AD BANNER COMPONENT (Clean & Neutral Styling)
+   ====================================================== */
+.ad-banner {
+    position: relative;
+    border-radius: 18px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #ffffff;
+    padding: 2.2rem 3rem;
+    background: #0f172a;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+    margin: 1.5rem 0;
+}
+
+.ad-banner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(15, 23, 42, 0.92) 0%, rgba(15, 23, 42, 0.72) 55%, rgba(15, 23, 42, 0.3) 100%);
+    z-index: 1;
+}
+
+.ad-banner.uploaded-banner {
+    padding: 0 !important;
+    background: none !important;
+    animation: none !important;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.ad-banner.uploaded-banner::before {
+    display: none !important;
+}
+
+.ad-banner.uploaded-banner img.banner-fill {
+    width: 100%;
+    height: auto;
+    min-height: 140px;
+    max-height: 320px;
+    object-fit: cover;
+    display: block;
+    border-radius: 18px;
+}
+
+.ad-banner-tag {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(6px);
+    padding: 4px 10px;
+    border-radius: 6px;
+    color: #ffffff;
+    z-index: 5;
+}
+
+.uploaded-banner .ad-banner-tag {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.ad-bg-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.85;
+    z-index: 1;
+}
+
+.ad-content {
+    position: relative;
+    z-index: 2;
+}
+
+.ad-cta {
+    position: relative;
+    z-index: 2;
+    background: #ffffff;
+    color: #0f172a;
+    font-weight: 700;
+    padding: 10px 24px;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    white-space: nowrap;
+}
+
+.ad-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    color: var(--brand);
+}
+
+/* ======================================================
+   AUTH & USER PORTAL STYLES (Login & Register)
+   ====================================================== */
+.auth-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+[data-bs-theme="dark"] .auth-card {
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
+}
+
+.auth-benefit-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+.password-toggle-btn {
+    border-left: none !important;
+    background-color: var(--bg-main) !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-muted) !important;
+    cursor: pointer;
+}
+
+.password-strength-bar {
+    height: 6px;
+    border-radius: 6px;
+    background: #e2e8f0;
+    overflow: hidden;
+    margin-top: 6px;
+}
+
+[data-bs-theme="dark"] .password-strength-bar {
+    background: #334155;
+}
+
+.password-strength-progress {
+    height: 100%;
+    width: 0%;
+    transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.demo-chip {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 20px;
+    border: 1px dashed var(--border-color);
+    background-color: var(--bg-main);
+    color: var(--text-body);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.demo-chip:hover {
+    border-color: var(--brand);
+    color: var(--brand);
+    background-color: rgba(250, 123, 23, 0.08);
+    transform: translateY(-1px);
+}
+
+.user-nav-dropdown .dropdown-toggle::after {
+    margin-left: 6px;
+}
+
+.user-avatar-badge {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--brand), #fb923c);
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 13px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+}
+
+/* ======================================================
+   GOOGLE & FACEBOOK OAUTH DIALOG & BUTTON STYLES
+   ====================================================== */
+.btn-google {
+    background-color: var(--bg-card) !important;
+    border: 1px solid var(--border-color) !important;
+    color: var(--text-heading) !important;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+.btn-google:hover {
+    background-color: var(--bg-main) !important;
+    border-color: #cbd5e1 !important;
+    color: var(--text-heading) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.btn-facebook {
+    background-color: #1877f2 !important;
+    border: 1px solid #1877f2 !important;
+    color: #ffffff !important;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+.btn-facebook:hover {
+    background-color: #166fe5 !important;
+    border-color: #166fe5 !important;
+    color: #ffffff !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(24, 119, 242, 0.25);
+}
+
+.oauth-modal-content {
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-card);
+    overflow: hidden;
+}
+
+.oauth-account-item {
+    padding: 12px 16px;
+    border-radius: 12px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+.oauth-account-item:hover {
+    background-color: var(--bg-main);
+    border-color: var(--border-color);
+    transform: translateX(4px);
+}
+
+.oauth-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.google-onetap-box {
+    position: fixed;
+    top: 80px;
+    right: 24px;
+    z-index: 1050;
+    width: 330px;
+    border-radius: 16px;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.18);
+    animation: slideInRight 0.4s ease;
+}
+@keyframes slideInRight {
+    from { transform: translateX(50px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+
+

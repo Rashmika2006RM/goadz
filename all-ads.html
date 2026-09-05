@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Classified Ads - go PAGEZ</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/logo.png">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        :root {
+            --brand: #FA7B17;
+            --brand-hover: #E0680A;
+            --filter-accent: #FA7B17;
+        }
+
+        /* ---- Orange Checkbox Override ---- */
+        .form-check-input:checked {
+            background-color: var(--brand) !important;
+            border-color: var(--brand) !important;
+        }
+        .form-check-input:focus {
+            border-color: var(--brand) !important;
+            box-shadow: 0 0 0 0.25rem rgba(250,123,23,0.25) !important;
+        }
+
+        /* ---- Filter Sidebar Card ---- */
+        .filter-sidebar-card {
+            border-radius: 16px !important;
+            transition: all 0.2s ease;
+        }
+        [data-bs-theme="light"] .filter-sidebar-card {
+            background: #ffffff !important;
+            border: 1px solid #e2e8f0 !important;
+        }
+        [data-bs-theme="dark"] .filter-sidebar-card {
+            background: #1e293b !important;
+            border: 1px solid #334155 !important;
+        }
+        .filter-sidebar-card .filter-title {
+            font-weight: 700;
+        }
+        .filter-sidebar-card .filter-reset-link {
+            color: var(--text-muted, #64748b);
+            font-size: 0.82rem;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .filter-sidebar-card .filter-reset-link:hover {
+            color: var(--brand);
+        }
+        .filter-section-label {
+            font-weight: 700;
+            font-size: 0.85rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            color: var(--text-heading, #0f172a);
+        }
+        [data-bs-theme="dark"] .filter-section-label {
+            color: #f8fafc;
+        }
+
+        /* Category list styling */
+        .cat-item-btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 8px 12px;
+            margin-bottom: 4px;
+            border-radius: 10px;
+            border: 1px solid transparent;
+            background: transparent;
+            color: var(--text-body, #334155);
+            font-size: 0.88rem;
+            font-weight: 500;
+            text-align: left;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        [data-bs-theme="dark"] .cat-item-btn {
+            color: #cbd5e1;
+        }
+        .cat-item-btn:hover {
+            background: rgba(250, 123, 23, 0.08);
+            color: var(--brand) !important;
+            border-color: rgba(250, 123, 23, 0.2);
+            transform: translateX(3px);
+        }
+        .cat-item-btn.active-cat {
+            background: var(--brand) !important;
+            color: #ffffff !important;
+            border-color: var(--brand) !important;
+            font-weight: 700;
+            box-shadow: 0 4px 12px rgba(250, 123, 23, 0.3);
+        }
+        .cat-item-btn.active-cat .cat-count {
+            background: rgba(255, 255, 255, 0.25) !important;
+            color: #ffffff !important;
+        }
+        .cat-item-btn.active-cat i {
+            color: #ffffff !important;
+        }
+        .cat-count {
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 20px;
+            background: rgba(0, 0, 0, 0.06);
+            color: var(--text-muted, #64748b);
+            font-weight: 600;
+        }
+        [data-bs-theme="dark"] .cat-count {
+            background: rgba(255, 255, 255, 0.1);
+            color: #94a3b8;
+        }
+        .subcat-box {
+            padding-left: 14px;
+            margin: 6px 0 10px 10px;
+            border-left: 2px solid var(--brand);
+        }
+        .subcat-chip {
+            display: inline-block;
+            padding: 3px 10px;
+            margin: 3px 3px 3px 0;
+            border-radius: 15px;
+            font-size: 0.78rem;
+            background: rgba(0, 0, 0, 0.05);
+            color: var(--text-body, #334155);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+        [data-bs-theme="dark"] .subcat-chip {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.1);
+            color: #cbd5e1;
+        }
+        .subcat-chip:hover {
+            background: rgba(250, 123, 23, 0.15);
+            color: var(--brand);
+            border-color: var(--brand);
+        }
+        .subcat-chip.active {
+            background: var(--brand) !important;
+            color: #ffffff !important;
+            border-color: var(--brand) !important;
+            font-weight: 600;
+        }
+
+        /* Apply button */
+        .btn-filter-apply {
+            background: var(--brand);
+            border: none;
+            color: #fff;
+            font-weight: 700;
+            border-radius: 50px;
+            padding: 10px 0;
+            transition: background 0.2s, transform 0.1s;
+        }
+        .btn-filter-apply:hover {
+            background: var(--brand-hover);
+            color: #fff;
+            transform: translateY(-1px);
+        }
+        /* Active filter badges */
+        #activeFilterBadges .badge {
+            cursor: pointer;
+        }    font-size: 0.78rem;
+        }
+        /* Results text */
+        #resultsCountText { font-size: 0.9rem; }
+        .hover-lift {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .hover-lift:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 18px rgba(0,0,0,0.08) !important;
+        }
+        
+        /* List View Custom Layout */
+        .ad-list-view .ad-card {
+            display: flex;
+            flex-direction: row;
+        }
+        .ad-list-view .ad-img-col {
+            width: 260px;
+            flex-shrink: 0;
+        }
+        @media (max-width: 767.98px) {
+            .ad-list-view .ad-card {
+                flex-direction: column;
+            }
+            .ad-list-view .ad-img-col {
+                width: 100%;
+            }
+        }
+
+        /* Ad Banners */
+        .ad-banner {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: #fff;
+            padding: 2rem 3rem;
+            background: #0f172a;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            margin: 2rem 0;
+        }
+        .ad-banner::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, rgba(15,23,42,0.92) 0%, rgba(15,23,42,0.72) 55%, rgba(15,23,42,0.3) 100%);
+            z-index: 1;
+        }
+        .ad-banner.uploaded-banner {
+            padding: 0 !important;
+            background: none !important;
+            animation: none !important;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .ad-banner.uploaded-banner::before {
+            display: none !important;
+        }
+        .ad-banner.uploaded-banner img.banner-fill {
+            width: 100%;
+            height: auto;
+            min-height: 140px;
+            max-height: 320px;
+            object-fit: cover;
+            display: block;
+            border-radius: 16px;
+        }
+        .ad-banner-tag {
+            position: absolute;
+            top: 12px;
+            right: 15px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            padding: 4px 10px;
+            border-radius: 4px;
+            color: #fff;
+            z-index: 5;
+        }
+        .uploaded-banner .ad-banner-tag {
+            background: rgba(0, 0, 0, 0.5);
+        }
+        .ad-bg-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.85;
+            z-index: 1;
+        }
+        .ad-content {
+            position: relative;
+            z-index: 2;
+        }
+        .ad-cta {
+            position: relative;
+            z-index: 2;
+            background: #fff;
+            color: #0f172a;
+            font-weight: 700;
+            padding: 10px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .ad-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+            color: var(--brand);
+        }
+    </style>
+</head>
+<body class="bg-light d-flex flex-column min-vh-100">
+
+    <!-- ================= HEADER TOP BANNER SLOT ================= -->
+    <div id="headerTopBannerSlot" style="display: none;"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-3 sticky-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="images/logo.png" alt="go PAGEZ" style="height:38px; width:auto; object-fit:contain;">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item me-2">
+                        <a class="nav-link text-dark fw-semibold" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item me-2">
+                        <a class="nav-link text-dark fw-semibold active" href="all-ads.html">Browse Ads</a>
+                    </li>
+                    <li class="nav-item me-2">
+                        <a class="nav-link text-dark" href="admin-panel.html">Admin</a>
+                    </li>
+                    <li class="nav-item me-2">
+                        <button class="theme-toggle-btn" id="darkModeToggle" title="Toggle Dark/Light Mode">
+                            <i class="fa-solid fa-moon" id="themeIcon"></i>
+                        </button>
+                    </li>
+                    <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
+                        <a class="btn btn-primary fw-bold text-white px-3" href="post-ad.html" style="border-radius:50px;">
+                            <i class="fa-solid fa-plus me-1"></i> Post Ad
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Top Search Header -->
+    <section class="bg-primary py-4 text-white">
+        <div class="container">
+            <form action="all-ads.html" method="GET" id="allAdsSearchForm" onsubmit="handleTopSearch(event)">
+                <div class="row g-2 justify-content-center">
+                    <div class="col-md-5">
+                        <div class="input-group">
+                            <span class="input-group-text bg-white border-0"><i class="fa-solid fa-magnifying-glass text-muted"></i></span>
+                            <input type="text" name="q" id="searchInput" class="form-control border-0" placeholder="What are you looking for?">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <span class="input-group-text bg-white border-0"><i class="fa-solid fa-list text-muted"></i></span>
+                            <select name="category" id="searchCategory" class="form-select border-0">
+                                <option value="" selected>All Categories</option>
+                                <option value="cars">Cars &amp; Vehicles</option>
+                                <option value="property">Property</option>
+                                <option value="electronics">Electronics</option>
+                                <option value="mobile">Mobile Phones</option>
+                                <option value="jobs">Jobs</option>
+                                <option value="fashion">Fashion</option>
+                                <option value="pets">Pets</option>
+                                <option value="services">Services</option>
+                                <option value="home">Home &amp; Living</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="input-group">
+                            <span class="input-group-text bg-white border-0"><i class="fa-solid fa-location-dot text-muted"></i></span>
+                            <input type="text" name="location" id="searchLocation" class="form-control border-0" placeholder="City / District...">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-dark fw-bold w-100" style="background:#0f172a; border:none; padding:10px;"><i class="fa-solid fa-search me-1"></i> Search</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Breadcrumb -->
+    <div class="container mt-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0 small">
+                <li class="breadcrumb-item"><a href="index.html" class="text-decoration-none">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">All Classified Ads</li>
+            </ol>
+        </nav>
+    </div>
+
+    <!-- ================= TOP AD BANNER ================= -->
+    <div class="container mt-3" id="defaultTopBanner">
+        <div class="ad-banner" style="margin: 0; padding: 1.5rem 2rem;">
+            <div class="ad-banner-tag">SPONSORED</div>
+            <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1200&q=80" alt="Tech Ad" class="ad-bg-img">
+            <div class="ad-content">
+                <h4 class="fw-bold mb-1">Upgrade Your Tech Arsenal</h4>
+                <p class="mb-0 text-white-50 small">Get up to 40% off on premium laptops and accessories this week.</p>
+            </div>
+            <a href="all-ads.html?category=electronics" class="ad-cta btn-sm py-2">Shop Deals</a>
+        </div>
+    </div>
+
+    <!-- Main Content Grid -->
+    <main class="container py-4 flex-grow-1">
+        <div class="row g-4">
+            
+            <!-- Left Sidebar: Filters (Desktop) -->
+            <aside class="col-lg-3 d-none d-lg-block">
+                <div class="card border-0 shadow filter-sidebar-card p-3 sticky-top" style="top: 90px; z-index: 10;">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="filter-title mb-0"><i class="fa-solid fa-sliders me-2" style="color:#FF6B00;"></i>Filters</h5>
+                        <a href="#" class="filter-reset-link" onclick="resetAllFilters(); return false;">Reset All</a>
+                    </div>
+                    <hr class="mt-0">
+
+                    <!-- Category Filter (dynamic) -->
+                    <div class="mb-4">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <div class="filter-section-label mb-0"><i class="fa-solid fa-layer-group me-1 text-primary"></i> Categories</div>
+                        </div>
+                        <div id="desktopCatList" class="d-flex flex-column gap-1">
+                            <!-- Populated dynamically with category icons, live counts and subcategories -->
+                        </div>
+                    </div>
+
+                    <!-- Price Range Filter -->
+                    <div class="mb-4">
+                        <div class="filter-section-label">Price Range (Rs.)</div>
+                        <div class="row g-2">
+                            <div class="col-6">
+                                <input type="number" id="priceMin" class="form-control form-control-sm" placeholder="Min" min="0">
+                            </div>
+                            <div class="col-6">
+                                <input type="number" id="priceMax" class="form-control form-control-sm" placeholder="Max" min="0">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Seller Type -->
+                    <div class="mb-4">
+                        <div class="filter-section-label">Posted By</div>
+                        <div class="form-check mb-1">
+                            <input class="form-check-input" type="checkbox" id="sellerIndividual" checked>
+                            <label class="form-check-label" for="sellerIndividual">Individual Sellers</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="sellerBusiness" checked>
+                            <label class="form-check-label" for="sellerBusiness">Verified Businesses / Dealers</label>
+                        </div>
+                    </div>
+
+                    <!-- Condition -->
+                    <div class="mb-4">
+                        <div class="filter-section-label">Condition</div>
+                        <div class="form-check mb-1">
+                            <input class="form-check-input" type="checkbox" id="condBrandNew" checked>
+                            <label class="form-check-label" for="condBrandNew">Brand New</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="condUsed" checked>
+                            <label class="form-check-label" for="condUsed">Used / Refurbished</label>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-filter-apply w-100" onclick="applyFilters()">
+                        <i class="fa-solid fa-check me-1"></i> Apply Filters
+                    </button>
+                </div>
+            </aside>
+
+            <!-- Middle Area: Listings & Sorting Header -->
+            <div class="col-lg-7">
+                
+                <!-- Toolbar: Result count, Sort, Grid/List switch, Mobile Filter Trigger -->
+                <div class="card border-0 shadow-sm p-3 mb-3">
+                    <div class="row align-items-center g-2">
+                        <div class="col-6 col-md-5">
+                            <span class="text-muted" id="resultsCountText">Loading ads…</span>
+                        </div>
+                        
+                        <div class="col-6 col-md-7 d-flex align-items-center justify-content-end gap-2">
+                            <!-- Mobile Filter Button -->
+                            <button class="btn btn-sm d-lg-none fw-semibold" style="background:#FF6B00;color:#fff;border-radius:50px;" data-bs-toggle="offcanvas" data-bs-target="#mobileFilterDrawer">
+                                <i class="fa-solid fa-sliders me-1"></i> Filters
+                            </button>
+
+                            <!-- Sorting Dropdown -->
+                            <div class="d-flex align-items-center gap-1">
+                                <label class="small text-muted d-none d-sm-inline">Sort:</label>
+                                <select class="form-select form-select-sm" id="sortSelect" style="width: auto;" onchange="applyFilters()">
+                                    <option value="newest" selected>Newest First</option>
+                                    <option value="price_low">Price: Low → High</option>
+                                    <option value="price_high">Price: High → Low</option>
+                                    <option value="title_az">Title: A → Z</option>
+                                </select>
+                            </div>
+
+                            <!-- View Switcher -->
+                            <div class="btn-group btn-group-sm">
+                                <button class="btn btn-outline-secondary active" id="gridViewBtn" title="Grid View">
+                                    <i class="fa-solid fa-border-all"></i>
+                                </button>
+                                <button class="btn btn-outline-secondary" id="listViewBtn" title="List View">
+                                    <i class="fa-solid fa-list"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Active Filter Badges -->
+                <div id="activeFilterBadges" class="mb-3 d-flex flex-wrap gap-2"></div>
+
+                <!-- Listings Container (Grid View by Default) -->
+                <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-3" id="listingsContainer">
+                    <!-- Dynamic listings will be injected here by app.js -->
+                </div>
+
+                <!-- Pagination -->
+                <nav class="mt-5" aria-label="Listings navigation">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item disabled">
+                            <a class="page-item page-link" href="#" tabindex="-1">Previous</a>
+                        </li>
+                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">Next</a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <!-- ================= MIDDLE AD BANNER ================= -->
+                <div class="ad-banner mt-5" id="defaultMiddleBanner" style="margin: 0; padding: 1.5rem 2rem;">
+                    <div class="ad-banner-tag">ADVERTISEMENT</div>
+                    <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=80" alt="Real Estate Ad" class="ad-bg-img">
+                    <div class="ad-content">
+                        <h4 class="fw-bold mb-1">Find Your Dream Home</h4>
+                        <p class="mb-0 text-white-50 small">Explore luxury apartments and beachfront properties with flexible payment plans.</p>
+                    </div>
+                    <a href="all-ads.html?category=property" class="ad-cta btn-sm py-2">Explore Properties</a>
+                </div>
+
+            </div>
+
+            <!-- Right Sidebar: Banner Ads (Desktop) -->
+            <aside class="col-lg-2 d-none d-lg-block">
+                <div class="sticky-top" style="top: 90px; z-index: 10;">
+                    <!-- ================= SIDEBAR RIGHT AD SLOT ================= -->
+                    <div id="sidebarRightBannerSlot" style="display: none;"></div>
+                    <!-- ================= SKYSCRAPER AD SLOT ================= -->
+                    <div id="skyscraperBannerSlot" style="display: none; margin-top: 15px;"></div>
+                </div>
+            </aside>
+
+        </div>
+    </main>
+
+    <!-- Offcanvas Mobile Filter Drawer -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileFilterDrawer">
+        <div class="offcanvas-header border-bottom">
+            <h5 class="offcanvas-title fw-bold"><i class="fa-solid fa-sliders me-2 text-primary"></i>Filter Listings</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <!-- Mobile Category Filter -->
+            <div class="mb-4">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div class="filter-section-label mb-0"><i class="fa-solid fa-layer-group me-1 text-primary"></i> Categories</div>
+                    <a href="#" class="filter-reset-link small" onclick="resetAllFilters(); return false;">Reset</a>
+                </div>
+                <div id="mobileCatList" class="d-flex flex-column gap-1">
+                    <!-- Populated dynamically -->
+                </div>
+            </div>
+
+            <hr>
+
+            <!-- Price Range -->
+            <div class="mb-4">
+                <label class="form-label fw-bold">Price Range (Rs.)</label>
+                <div class="row g-2">
+                    <div class="col-6"><input type="number" id="mPriceMin" class="form-control form-control-sm" placeholder="Min" min="0"></div>
+                    <div class="col-6"><input type="number" id="mPriceMax" class="form-control form-control-sm" placeholder="Max" min="0"></div>
+                </div>
+            </div>
+
+            <!-- Condition -->
+            <div class="mb-4">
+                <label class="form-label fw-bold">Condition</label>
+                <div class="form-check mb-1">
+                    <input class="form-check-input" type="checkbox" id="mCondBrandNew" checked>
+                    <label class="form-check-label" for="mCondBrandNew">Brand New</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="mCondUsed" checked>
+                    <label class="form-check-label" for="mCondUsed">Used / Refurbished</label>
+                </div>
+            </div>
+
+            <!-- Seller -->
+            <div class="mb-4">
+                <label class="form-label fw-bold">Posted By</label>
+                <div class="form-check mb-1"><input class="form-check-input" type="checkbox" id="mSellerMem" checked><label class="form-check-label" for="mSellerMem">Individual Sellers</label></div>
+                <div class="form-check"><input class="form-check-input" type="checkbox" id="mSellerBiz" checked><label class="form-check-label" for="mSellerBiz">Verified Dealers</label></div>
+            </div>
+            
+            <div class="d-grid gap-2">
+                <button class="btn btn-primary fw-bold py-2" data-bs-dismiss="offcanvas" onclick="applyFilters()">
+                    <i class="fa-solid fa-check me-1"></i> Apply Filters
+                </button>
+                <button class="btn btn-outline-secondary btn-sm" onclick="resetAllFilters()">
+                    <i class="fa-solid fa-rotate-left me-1"></i> Reset All Filters
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 mt-auto">
+        <div class="container text-center">
+            <p class="mb-0 small">&copy; 2026 go PAGEZ. All rights reserved.</p>
+            <!-- ================= FOOTER BANNER SLOT ================= -->
+            <div id="footerBannerSlot" class="mt-4" style="display: none;"></div>
+        </div>
+    </footer>
+
+    <!-- ================= CATEGORY PAGE POPUP MODAL ================= -->
+    <div class="modal fade" id="categoryPopupModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content border-0 shadow-lg bg-transparent">
+                <div class="modal-header border-0 pb-0 justify-content-end">
+                    <button type="button" class="btn-close bg-white rounded-circle p-2 shadow-sm" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center p-0" id="categoryPopupModalContent">
+                    <!-- Banner Injected Here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS App Script -->
+    <script src="js/app.js"></script>
+
+    <!-- View Switcher Script -->
+    <script>
+        const gridViewBtn = document.getElementById('gridViewBtn');
+        const listViewBtn = document.getElementById('listViewBtn');
+        const listingsContainer = document.getElementById('listingsContainer');
+
+        // Switch to Grid View
+        gridViewBtn.addEventListener('click', () => {
+            gridViewBtn.classList.add('active');
+            listViewBtn.classList.remove('active');
+            listingsContainer.className = "row row-cols-1 row-cols-md-2 row-cols-xl-3 g-3";
+            
+            document.querySelectorAll('.ad-card').forEach(card => {
+                card.classList.remove('flex-row');
+            });
+        });
+
+        // Switch to List View
+        listViewBtn.addEventListener('click', () => {
+            listViewBtn.classList.add('active');
+            gridViewBtn.classList.remove('active');
+            listingsContainer.className = "row row-cols-1 g-3 ad-list-view";
+        });
+    </script>
+</body>
+</html>

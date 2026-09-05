@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="go PAGEZ - Sri Lanka's #1 online marketplace. Buy and sell cars, property, electronics, mobile phones and more.">
+    <title>go PAGEZ - Buy &amp; Sell Anything Near You</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/logo.png">
+
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome 6 -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        :root {
+            --brand: #FA7B17;
+            --brand-h: #E0680A;
+            --brand-blue: #1E4BB8;
+            --font: 'Plus Jakarta Sans', sans-serif;
+        }
+        * { box-sizing: border-box; }
+        body { font-family: var(--font); }
+
+        /* ====== HEADER TOP BANNER ====== */
+        #headerTopBannerSlot {
+            width: 100%; overflow: hidden;
+            background: linear-gradient(90deg, #1e293b, #0f172a);
+        }
+        #headerTopBannerSlot img { width: 100%; max-height: 90px; object-fit: cover; display: block; }
+
+        /* ====== NAVBAR ====== */
+        .navbar { backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0,0,0,.07); }
+        .navbar-brand { font-weight: 800; font-size: 1.4rem; letter-spacing: -0.5px; }
+        .nav-link { font-weight: 500; font-size: 0.9rem; transition: color .2s; padding: 0.5rem 0.85rem !important; }
+        .nav-link:hover { color: var(--brand) !important; }
+        .nav-link.active { color: var(--brand) !important; font-weight: 600; }
+
+        /* ====== HERO SECTION ====== */
+        .hero-section {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #fa7b17 100%);
+            padding: 90px 0 130px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: radial-gradient(ellipse at 70% 50%, rgba(250,123,23,.18) 0%, transparent 60%);
+        }
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: rgba(255,255,255,.1); backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,.15);
+            padding: 6px 16px; border-radius: 50px; font-size: 13px;
+            color: #93c5fd; margin-bottom: 20px;
+        }
+        .hero-badge .dot { width: 7px; height: 7px; background: #22c55e; border-radius: 50%; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: .5; transform: scale(1.3); } }
+        .hero-section h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; line-height: 1.15; letter-spacing: -1px; }
+        .hero-stats { display: flex; gap: 40px; margin-top: 36px; }
+        .hero-stat-num { font-size: 1.5rem; font-weight: 800; color: #60a5fa; display: block; }
+        .hero-stat-lbl { font-size: 12px; color: rgba(255,255,255,.55); }
+
+        /* ====== SEARCH BOX ====== */
+        .search-box-wrapper {
+            margin-top: -65px;
+            position: relative;
+            z-index: 20;
+        }
+        .search-card {
+            border-radius: 20px !important;
+            box-shadow: 0 20px 60px rgba(0,0,0,.12) !important;
+            border: none !important;
+        }
+        .search-divider { border-left: 1px solid #e2e8f0; }
+        [data-bs-theme=dark] .search-divider { border-left-color: #334155; }
+        .search-card .form-control, .search-card .form-select {
+            border: none !important; box-shadow: none !important;
+            font-size: 14px;
+        }
+        .search-card .input-group-text { border: none; background: transparent; }
+
+        /* ====== AD BANNER COMPONENT ====== */
+        .ad-banner {
+            position: relative; border-radius: 18px; overflow: hidden;
+            display: flex; align-items: center; justify-content: space-between;
+            color: #fff; padding: 2.2rem 3rem;
+            background: #0f172a;
+            box-shadow: 0 15px 40px rgba(0,0,0,.12);
+            margin: 1.5rem 0;
+        }
+        .ad-banner::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: linear-gradient(90deg, rgba(15,23,42,0.92) 0%, rgba(15,23,42,0.72) 55%, rgba(15,23,42,0.3) 100%);
+            z-index: 1;
+        }
+        .ad-banner.uploaded-banner {
+            padding: 0 !important; background: none !important; animation: none !important; cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0,0,0,.1);
+        }
+        .ad-banner.uploaded-banner::before {
+            display: none !important;
+        }
+        .ad-banner.uploaded-banner img.banner-fill {
+            width: 100%; height: auto; min-height: 140px; max-height: 320px;
+            object-fit: cover; display: block;
+            border-radius: 18px;
+        }
+        .ad-banner-tag {
+            position: absolute; top: 12px; right: 14px;
+            font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+            background: rgba(0,0,0,.6); backdrop-filter: blur(6px);
+            padding: 4px 10px; border-radius: 6px; color: white; z-index: 5;
+        }
+        .uploaded-banner .ad-banner-tag { background: rgba(0,0,0,.5); }
+        .ad-bg-img {
+            position: absolute; inset: 0; width: 100%; height: 100%;
+            object-fit: cover; opacity: 0.85; z-index: 1;
+        }
+        .ad-content { position: relative; z-index: 2; }
+        .ad-cta {
+            position: relative; z-index: 2; background: #fff; color: #0f172a;
+            font-weight: 700; padding: 10px 24px; border-radius: 50px;
+            text-decoration: none; transition: all .3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,.15); white-space: nowrap;
+        }
+        .ad-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,.2); color: var(--brand); }
+
+        /* Header top banner full-width style */
+        .header-banner-link { display: block; width: 100%; overflow: hidden; }
+        .header-banner-link img { width: 100%; max-height: 90px; object-fit: cover; display: block; }
+
+        /* ====== CATEGORY CARDS ====== */
+        .category-card {
+            transition: transform .25s, box-shadow .25s;
+            text-decoration: none; color: inherit;
+            border-radius: 14px !important;
+        }
+        .category-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 32px rgba(0,0,0,.1) !important;
+        }
+        .cat-icon-wrap {
+            width: 58px; height: 58px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 12px; font-size: 1.35rem;
+        }
+        .count-badge { font-size: 11px; color: #64748b; margin-top: 2px; }
+
+        /* ====== LISTING CARDS ====== */
+        .listing-card {
+            transition: transform .25s, box-shadow .25s;
+            overflow: hidden; border-radius: 14px !important;
+        }
+        .listing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 28px rgba(0,0,0,.1) !important;
+        }
+        .listing-img-wrapper {
+            position: relative; height: 200px; overflow: hidden;
+        }
+        .listing-img-wrapper img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform .4s ease;
+        }
+        .listing-card:hover .listing-img-wrapper img { transform: scale(1.06); }
+        .badge-featured {
+            position: absolute; top: 12px; left: 12px;
+            background: #FA7B17; color: #fff;
+            font-size: 0.7rem; font-weight: 700;
+            padding: 4px 10px; border-radius: 5px; z-index: 2;
+        }
+        .badge-sponsored {
+            position: absolute; top: 12px; left: 12px;
+            background: #1E4BB8; color: #fff;
+            font-size: 0.7rem; font-weight: 700;
+            padding: 4px 10px; border-radius: 5px; z-index: 2;
+        }
+        .like-btn {
+            position: absolute; top: 12px; right: 12px;
+            background: rgba(255,255,255,.9); border: none;
+            width: 34px; height: 34px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: #64748b; cursor: pointer; transition: all .2s; z-index: 2;
+        }
+        .like-btn:hover { color: #ef4444; background: #fff; transform: scale(1.1); }
+        .price-tag { color: var(--brand); font-weight: 700; font-size: 1rem; }
+
+        /* ====== TRUST BANNER ====== */
+        .trust-bar { background: linear-gradient(90deg, #FA7B17, #1E4BB8); color: white; padding: 18px 0; }
+        .trust-item { display: flex; align-items: center; gap: 10px; }
+        .trust-item i { font-size: 1.4rem; opacity: .8; }
+
+        /* ====== SELLER CARDS ====== */
+        .seller-avatar { width: 72px; height: 72px; object-fit: cover; border-radius: 50%; border: 3px solid #e2e8f0; }
+        [data-bs-theme=dark] .seller-avatar { border-color: #334155; }
+
+        /* ====== SECTION HEADERS ====== */
+        .section-eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 2px; color: var(--brand); text-transform: uppercase; margin-bottom: 6px; }
+        .section-title { font-size: 1.75rem; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 4px; }
+
+        /* ====== FOOTER ====== */
+        .footer-logo { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.5px; }
+        .social-btn {
+            width: 36px; height: 36px; border-radius: 50%;
+            display: inline-flex; align-items: center; justify-content: center;
+            border: 1px solid rgba(255,255,255,.2); color: rgba(255,255,255,.7);
+            transition: all .2s; text-decoration: none; font-size: 13px;
+        }
+        .social-btn:hover { background: var(--brand); border-color: var(--brand); color: white; transform: translateY(-2px); }
+
+        /* ====== POPUP MODAL ====== */
+        .popup-modal-content { background: transparent !important; border: none !important; }
+        .popup-close-btn {
+            position: absolute; top: -15px; right: -15px; width: 36px; height: 36px;
+            background: white; border: none; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,.2); cursor: pointer; z-index: 10; font-size: 16px; color: #64748b;
+        }
+        .popup-close-btn:hover { color: #ef4444; }
+
+        /* ====== RESPONSIVE ====== */
+        @media (max-width: 768px) {
+            .hero-section { padding: 60px 0 100px; }
+            .hero-stats { gap: 24px; flex-wrap: wrap; }
+            .ad-banner { padding: 1.5rem 1.5rem; flex-direction: column; gap: 14px; text-align: center; }
+            .search-box-wrapper { margin-top: -40px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== HEADER TOP BANNER SLOT ===== -->
+    <div id="headerTopBannerSlot" style="display:none;"></div>
+
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top shadow-sm" style="z-index:100;">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+                <img src="images/logo.png" alt="go PAGEZ" style="height:40px; width:auto; object-fit:contain;">
+            </a>
+
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-3">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="all-ads.html">Browse Ads</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#categories">Categories</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#featured">Featured</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#latest">Latest</a></li>
+                </ul>
+
+                <div class="d-flex align-items-center gap-2">
+                    <button class="btn btn-link text-body-secondary border-0 p-2" id="darkModeToggle" title="Toggle Dark Mode">
+                        <i class="fa-solid fa-moon" id="themeIcon" style="font-size:1.1rem;"></i>
+                    </button>
+                    <a href="post-ad.html" class="btn btn-primary btn-sm fw-bold px-4" style="border-radius:50px;">
+                        <i class="fa-solid fa-plus me-1"></i> Post Ad
+                    </a>
+                    <a href="admin-panel.html" class="btn btn-outline-secondary btn-sm fw-semibold">
+                        <i class="fa-solid fa-shield-halved me-1"></i> Admin
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== HERO SECTION ===== -->
+    <section class="hero-section text-white text-center position-relative overflow-hidden" id="heroSection">
+        <!-- Background Video Element -->
+        <video id="heroBgVideo" autoplay muted loop playsinline style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; pointer-events:none; display:none;"></video>
+        <!-- Background Overlay Tint Element -->
+        <div id="heroBgOverlay" style="position:absolute; inset:0; z-index:1; pointer-events:none; display:none;"></div>
+
+        <div class="container position-relative" style="z-index:2;" data-aos="fade-up">
+            <div class="hero-badge" id="heroBadge">
+                <span class="dot"></span>
+                <span id="heroBadgeText">Sri Lanka's #1 Online Marketplace</span>
+            </div>
+            <h1 class="mb-3" id="heroMainTitle">Buy, Sell &amp; Find Anything<br><span id="heroHighlightText" style="color:#fb923c;">Near You</span></h1>
+            <p class="lead mb-0" id="heroSubtitleText" style="color:rgba(255,255,255,.75); max-width:560px; margin:0 auto;">Discover thousands of verified listings in vehicles, property, electronics and more on go PAGEZ.</p>
+
+            <div class="hero-stats justify-content-center" data-aos="fade-up" data-aos-delay="200" id="heroStatsContainer">
+                <div>
+                    <span class="hero-stat-num" id="heroStat1Num">120K+</span>
+                    <span class="hero-stat-lbl" id="heroStat1Lbl">Active Listings</span>
+                </div>
+                <div>
+                    <span class="hero-stat-num" id="heroStat2Num">45K+</span>
+                    <span class="hero-stat-lbl" id="heroStat2Lbl">Happy Sellers</span>
+                </div>
+                <div>
+                    <span class="hero-stat-num" id="heroStat3Num">9</span>
+                    <span class="hero-stat-lbl" id="heroStat3Lbl">Categories</span>
+                </div>
+                <div>
+                    <span class="hero-stat-num" id="heroStat4Num">100%</span>
+                    <span class="hero-stat-lbl" id="heroStat4Lbl">Free to Post</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SEARCH BAR ===== -->
+    <div class="container search-box-wrapper" data-aos="fade-up" data-aos-delay="100">
+        <div class="card search-card p-3">
+            <form action="all-ads.html" method="GET">
+                <div class="row g-2 align-items-center">
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            <span class="input-group-text text-muted"><i class="fa-solid fa-magnifying-glass"></i></span>
+                            <input type="text" name="q" class="form-control" placeholder="What are you looking for?">
+                        </div>
+                    </div>
+                    <div class="col-md-3 search-divider">
+                        <div class="input-group">
+                            <span class="input-group-text text-muted"><i class="fa-solid fa-location-dot"></i></span>
+                            <input type="text" name="location" class="form-control" placeholder="City or District...">
+                        </div>
+                    </div>
+                    <div class="col-md-3 search-divider">
+                        <div class="input-group">
+                            <span class="input-group-text text-muted"><i class="fa-solid fa-list"></i></span>
+                            <select class="form-select" name="category">
+                                <option value="">All Categories</option>
+                                <option value="cars">Cars &amp; Vehicles</option>
+                                <option value="property">Property</option>
+                                <option value="electronics">Electronics</option>
+                                <option value="jobs">Jobs</option>
+                                <option value="mobile">Mobile Phones</option>
+                                <option value="fashion">Fashion</option>
+                                <option value="pets">Pets</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-primary w-100 fw-bold" style="border-radius:10px; padding:11px;">
+                            Search <i class="fa-solid fa-arrow-right ms-1"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ===== HOME PAGE MAIN BANNER SLOT ===== -->
+    <div id="homeMainBannerSlot" style="display:none;" class="container"></div>
+
+    <!-- ===== TOP AD BANNER (Default — shown when no uploaded banner) ===== -->
+    <div class="container" data-aos="fade-up" data-aos-delay="150" id="defaultTopBanner">
+        <div class="ad-banner">
+            <div class="ad-banner-tag">SPONSORED</div>
+            <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1200&q=80" alt="Tech Ad" class="ad-bg-img">
+            <div class="ad-content">
+                <h3 class="fw-bold mb-1">Upgrade Your Tech Arsenal</h3>
+                <p class="mb-0" style="color:rgba(255,255,255,.8);">Get up to 40% off on premium laptops and accessories this week.</p>
+            </div>
+            <a href="all-ads.html?category=electronics" class="ad-cta">Shop Deals</a>
+        </div>
+    </div>
+
+    <!-- ===== CATEGORIES SECTION ===== -->
+    <section class="py-5 mt-2" id="categories">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-end mb-4" data-aos="fade-up">
+                <div>
+                    <div class="section-eyebrow">Browse by Type</div>
+                    <h2 class="section-title">Explore Categories</h2>
+                    <p class="text-muted mb-0">Find what you're looking for in seconds</p>
+                </div>
+                <a href="all-ads.html" class="btn btn-outline-primary btn-sm fw-semibold">View All</a>
+            </div>
+
+            <div class="row g-3">
+                <!-- Cars -->
+                <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="50">
+                    <a href="all-ads.html?category=cars" class="card h-100 border-0 shadow-sm p-3 text-center category-card bg-body">
+                        <div class="cat-icon-wrap bg-primary-subtle text-primary"><i class="fa-solid fa-car"></i></div>
+                        <h6 class="fw-bold mb-1">Cars &amp; Vehicles</h6>
+                        <div class="count-badge">12,450 Ads</div>
+                    </a>
+                </div>
+                <!-- Property -->
+                <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+                    <a href="all-ads.html?category=property" class="card h-100 border-0 shadow-sm p-3 text-center category-card bg-body">
+                        <div class="cat-icon-wrap bg-success-subtle text-success"><i class="fa-solid fa-house"></i></div>
+                        <h6 class="fw-bold mb-1">Property</h6>
+                        <div class="count-badge">8,120 Ads</div>
+                    </a>
+                </div>
+                <!-- Electronics -->
+                <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="150">
+                    <a href="all-ads.html?category=electronics" class="card h-100 border-0 shadow-sm p-3 text-center category-card bg-body">
+                        <div class="cat-icon-wrap bg-info-subtle text-info"><i class="fa-solid fa-laptop"></i></div>
+                        <h6 class="fw-bold mb-1">Electronics</h6>
+                        <div class="count-badge">24,890 Ads</div>
+                    </a>
+                </div>
+                <!-- Mobile -->
+                <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+                    <a href="all-ads.html?category=mobile" class="card h-100 border-0 shadow-sm p-3 text-center category-card bg-body">
+                        <div class="cat-icon-wrap bg-warning-subtle text-warning"><i class="fa-solid fa-mobile-screen-button"></i></div>
+                        <h6 class="fw-bold mb-1">Mobile Phones</h6>
+                        <div class="count-badge">31,050 Ads</div>
+                    </a>
+                </div>
+                <!-- Jobs -->
+                <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="250">
+                    <a href="all-ads.html?category=jobs" class="card h-100 border-0 shadow-sm p-3 text-center category-card bg-body">
+                        <div class="cat-icon-wrap bg-danger-subtle text-danger"><i class="fa-solid fa-briefcase"></i></div>
+                        <h6 class="fw-bold mb-1">Jobs</h6>
+                        <div class="count-badge">3,400 Ads</div>
+                    </a>
+                </div>
+                <!-- Fashion -->
+                <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+                    <a href="all-ads.html?category=fashion" class="card h-100 border-0 shadow-sm p-3 text-center category-card bg-body">
+                        <div class="cat-icon-wrap bg-secondary-subtle text-secondary"><i class="fa-solid fa-shirt"></i></div>
+                        <h6 class="fw-bold mb-1">Fashion</h6>
+                        <div class="count-badge">15,200 Ads</div>
+                    </a>
+                </div>
+                <!-- Pets -->
+                <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="350">
+                    <a href="all-ads.html?category=pets" class="card h-100 border-0 shadow-sm p-3 text-center category-card bg-body">
+                        <div class="cat-icon-wrap bg-success-subtle text-success"><i class="fa-solid fa-paw"></i></div>
+                        <h6 class="fw-bold mb-1">Pets</h6>
+                        <div class="count-badge">1,890 Ads</div>
+                    </a>
+                </div>
+                <!-- Services -->
+                <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="400">
+                    <a href="all-ads.html?category=services" class="card h-100 border-0 shadow-sm p-3 text-center category-card bg-body">
+                        <div class="cat-icon-wrap bg-primary-subtle text-primary"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+                        <h6 class="fw-bold mb-1">Services</h6>
+                        <div class="count-badge">5,670 Ads</div>
+                    </a>
+                </div>
+                <!-- Home & Living -->
+                <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="450">
+                    <a href="all-ads.html?category=home" class="card h-100 border-0 shadow-sm p-3 text-center category-card bg-body">
+                        <div class="cat-icon-wrap bg-warning-subtle text-warning"><i class="fa-solid fa-couch"></i></div>
+                        <h6 class="fw-bold mb-1">Home &amp; Living</h6>
+                        <div class="count-badge">4,320 Ads</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== MIDDLE BANNER (uploaded or default) ===== -->
+    <div class="container" data-aos="fade-up">
+        <!-- Default middle banner -->
+        <div class="ad-banner" id="defaultMiddleBanner">
+            <div class="ad-banner-tag">ADVERTISEMENT</div>
+            <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=80" alt="Real Estate" class="ad-bg-img">
+            <div class="ad-content">
+                <h3 class="fw-bold mb-1">Find Your Dream Home</h3>
+                <p class="mb-0" style="color:rgba(255,255,255,.8);">Explore luxury apartments and beachfront properties.</p>
+            </div>
+            <a href="all-ads.html?category=property" class="ad-cta">Explore Now</a>
+        </div>
+    </div>
+
+    <!-- ===== TRUST BAR ===== -->
+    <div class="trust-bar" data-aos="fade-up">
+        <div class="container">
+            <div class="row g-3 text-center text-md-start">
+                <div class="col-6 col-md-3">
+                    <div class="trust-item justify-content-center justify-content-md-start">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <div>
+                            <div class="fw-bold" style="font-size:13px;">100% Verified</div>
+                            <div style="font-size:11px; opacity:.7;">All sellers checked</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="trust-item justify-content-center justify-content-md-start">
+                        <i class="fa-solid fa-bolt"></i>
+                        <div>
+                            <div class="fw-bold" style="font-size:13px;">Instant Post</div>
+                            <div style="font-size:11px; opacity:.7;">Live in seconds</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="trust-item justify-content-center justify-content-md-start">
+                        <i class="fa-solid fa-tags"></i>
+                        <div>
+                            <div class="fw-bold" style="font-size:13px;">Best Prices</div>
+                            <div style="font-size:11px; opacity:.7;">No hidden fees</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="trust-item justify-content-center justify-content-md-start">
+                        <i class="fa-solid fa-headset"></i>
+                        <div>
+                            <div class="fw-bold" style="font-size:13px;">24/7 Support</div>
+                            <div style="font-size:11px; opacity:.7;">Always here to help</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== FEATURED ADS ===== -->
+    <section class="py-5" id="featured" style="background: var(--bs-body-bg);">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-end mb-4" data-aos="fade-up">
+                <div>
+                    <div class="section-eyebrow">Premium Picks</div>
+                    <h2 class="section-title">Featured Listings</h2>
+                    <p class="text-muted mb-0">Handpicked for maximum visibility</p>
+                </div>
+                <a href="all-ads.html" class="btn btn-outline-primary btn-sm fw-semibold">View All</a>
+            </div>
+
+            <div class="row g-4" id="featuredAdsRow">
+                <!-- Dynamic listings will be injected here by app.js -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SQUARE AD SLOT (between sections) ===== -->
+    <div id="squareAdBannerSlot" style="display:none;" class="container"></div>
+
+    <!-- ===== LATEST ADS ===== -->
+    <section class="py-5" id="latest" style="background: var(--bs-tertiary-bg);">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-end mb-4" data-aos="fade-up">
+                <div>
+                    <div class="section-eyebrow">Fresh Listings</div>
+                    <h2 class="section-title">Latest Announcements</h2>
+                    <p class="text-muted mb-0">Added moments ago</p>
+                </div>
+                <a href="all-ads.html" class="btn btn-outline-secondary btn-sm fw-semibold">View All Ads</a>
+            </div>
+
+            <div class="row g-4" id="latestAdsRow">
+                <!-- Dynamic listings will be injected here by app.js -->
+                <!-- IN-FEED SPONSORED SLOT -->
+                <div id="inFeedBannerSlot" style="display:none;" class="col-md-6 col-lg-3"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== BOTTOM BANNER AD SLOT ===== -->
+    <div id="bottomBannerSlot" style="display:none;" class="container"></div>
+
+
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="bg-dark text-white pt-5 pb-3">
+        <div class="container">
+            <div class="row g-4 mb-4">
+                <!-- Brand -->
+                <div class="col-lg-4">
+                    <a class="footer-logo d-flex align-items-center gap-2 text-white text-decoration-none mb-3" href="index.html">
+                        <img src="images/logo.png" alt="go PAGEZ" class="footer-logo-img">
+                    </a>
+                    <p class="text-secondary small mb-3" style="line-height:1.7;">
+                        Sri Lanka's premier online classifieds and advertising marketplace. Buy, sell, or rent vehicles, property, mobiles, electronics &amp; more with go PAGEZ.
+                    </p>
+                    <div class="d-flex gap-2">
+                        <a href="#" class="social-btn"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="social-btn"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#" class="social-btn"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="social-btn"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="#" class="social-btn"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="col-6 col-lg-2">
+                    <h6 class="fw-bold mb-3 text-light">Quick Links</h6>
+                    <ul class="list-unstyled text-secondary small d-flex flex-column gap-2 mb-0">
+                        <li><a href="index.html" class="text-reset text-decoration-none">Home</a></li>
+                        <li><a href="all-ads.html" class="text-reset text-decoration-none">Browse Ads</a></li>
+                        <li><a href="post-ad.html" class="text-reset text-decoration-none">Post an Ad</a></li>
+                        <li><a href="admin-panel.html" class="text-reset text-decoration-none">Admin Panel</a></li>
+                    </ul>
+                </div>
+
+                <!-- Categories -->
+                <div class="col-6 col-lg-2">
+                    <h6 class="fw-bold mb-3 text-light">Categories</h6>
+                    <ul class="list-unstyled text-secondary small d-flex flex-column gap-2 mb-0">
+                        <li><a href="all-ads.html" class="text-reset text-decoration-none">Cars &amp; Vehicles</a></li>
+                        <li><a href="all-ads.html" class="text-reset text-decoration-none">Property &amp; Rentals</a></li>
+                        <li><a href="all-ads.html" class="text-reset text-decoration-none">Mobile Phones</a></li>
+                        <li><a href="all-ads.html" class="text-reset text-decoration-none">Electronics</a></li>
+                        <li><a href="all-ads.html" class="text-reset text-decoration-none">Jobs</a></li>
+                        <li><a href="all-ads.html" class="text-reset text-decoration-none">Fashion</a></li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter -->
+                <div class="col-lg-4">
+                    <h6 class="fw-bold mb-3 text-light">Stay Updated</h6>
+                    <p class="text-secondary small mb-3">Get daily alerts on new listings and exclusive deals.</p>
+                    <form class="d-flex gap-2" onsubmit="return false;">
+                        <input type="email" class="form-control form-control-sm bg-secondary border-0 text-white" placeholder="Your email address" style="border-radius:8px;">
+                        <button class="btn btn-primary btn-sm px-3 fw-bold" type="submit" style="border-radius:8px; white-space:nowrap;">Subscribe</button>
+                    </form>
+                    <p class="text-secondary small mt-3 mb-0"><i class="fa-solid fa-lock me-1"></i> We never spam. Unsubscribe anytime.</p>
+                </div>
+            </div>
+
+            <!-- Footer Banner Slot -->
+            <div id="footerBannerSlot" style="display:none;" class="mb-4"></div>
+
+            <hr class="border-secondary">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center text-secondary small">
+                <p class="mb-2 mb-md-0">&copy; 2026 go PAGEZ. All rights reserved.</p>
+                <div class="d-flex gap-3">
+                    <a href="#" class="text-reset text-decoration-none">Privacy Policy</a>
+                    <a href="#" class="text-reset text-decoration-none">Terms of Service</a>
+                    <a href="#" class="text-reset text-decoration-none">Safety Guidelines</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== HOME PAGE POPUP MODAL ===== -->
+    <div class="modal fade" id="homePopupModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content popup-modal-content">
+                <div class="modal-body text-center p-0 position-relative">
+                    <button type="button" class="popup-close-btn" data-bs-dismiss="modal">&times;</button>
+                    <div id="homePopupModalContent"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- App JS -->
+    <script src="js/app.js"></script>
+
+    <script>
+        // Init AOS
+        AOS.init({ duration: 700, once: true, offset: 80 });
+
+        // Dark Mode & Light Mode Theme
+        initTheme();
+
+        // Like Button Toggle
+        function toggleLike(btn) {
+            const icon = btn.querySelector('i');
+            if (icon.classList.contains('fa-regular')) {
+                icon.classList.replace('fa-regular', 'fa-solid');
+                icon.style.color = '#ef4444';
+                btn.style.color = '#ef4444';
+            } else {
+                icon.classList.replace('fa-solid', 'fa-regular');
+                icon.style.color = '';
+                btn.style.color = '';
+            }
+        }
+    </script>
+</body>
+</html>

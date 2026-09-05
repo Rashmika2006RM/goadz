@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - go PAGEZ Advertiser Portal</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/logo.png">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Animation CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-body d-flex flex-column min-vh-100">
+
+    <!-- Minimal Navbar -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom py-3 sticky-top shadow-sm">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+                <img src="images/logo.png" alt="go PAGEZ" style="height:38px; width:auto; object-fit:contain;">
+            </a>
+            <div class="d-flex align-items-center gap-3">
+                <button class="theme-toggle-btn" id="darkModeToggle" title="Toggle Dark/Light Mode">
+                    <i class="fa-solid fa-moon" id="themeIcon"></i>
+                </button>
+                <a href="index.html" class="text-decoration-none text-muted small fw-semibold">
+                    <i class="fa-solid fa-arrow-left me-1"></i> Back to Homepage
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Auth & Advertiser Info Section -->
+    <section class="py-5 my-auto">
+        <div class="container">
+            <div class="row align-items-center g-5">
+                
+                <!-- LEFT COLUMN: Advertiser Details & Value Proposition -->
+                <div class="col-lg-6" data-aos="fade-right">
+                    <div class="pe-lg-4">
+                        <span class="badge bg-primary-subtle text-primary fw-bold mb-3 px-3 py-2 rounded-pill">
+                            <i class="fa-solid fa-chart-line me-1"></i> Advertiser &amp; Seller Portal
+                        </span>
+                        <h1 class="fw-bold display-6 mb-3 text-body">
+                            Reach Thousands of Local Buyers Daily
+                        </h1>
+                        <p class="text-muted lead fs-6 mb-4">
+                            Log in to manage your listings, track real-time ad performance, and communicate directly with verified buyers across Sri Lanka.
+                        </p>
+
+                        <!-- Key Advertiser Benefits -->
+                        <div class="d-flex align-items-start mb-3">
+                            <div class="auth-benefit-icon bg-primary-subtle text-primary me-3">
+                                <i class="fa-solid fa-eye"></i>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold mb-1 text-body">High Visibility &amp; Reach</h6>
+                                <p class="text-muted small mb-0">Get your products in front of over 100,000 active shoppers looking for deals daily.</p>
+                            </div>
+                        </div>
+
+                        <div class="d-flex align-items-start mb-3">
+                            <div class="auth-benefit-icon bg-success-subtle text-success me-3">
+                                <i class="fa-solid fa-chart-pie"></i>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold mb-1 text-body">Ad Performance &amp; Leads</h6>
+                                <p class="text-muted small mb-0">Monitor total ad views, phone reveals, and buyer inquiries with instant notifications.</p>
+                            </div>
+                        </div>
+
+                        <div class="d-flex align-items-start mb-4">
+                            <div class="auth-benefit-icon bg-warning-subtle text-warning me-3">
+                                <i class="fa-solid fa-shield-halved"></i>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold mb-1 text-body">Verified Seller Badge</h6>
+                                <p class="text-muted small mb-0">Build buyer trust instantly with verified account credentials and seller ratings.</p>
+                            </div>
+                        </div>
+
+                        <!-- Mini Advertiser Stats Box -->
+                        <div class="p-3 bg-body-tertiary rounded-3 border shadow-sm d-flex justify-content-around text-center">
+                            <div>
+                                <h5 class="fw-bold text-primary mb-0">500k+</h5>
+                                <small class="text-muted">Monthly Buyers</small>
+                            </div>
+                            <div class="border-end"></div>
+                            <div>
+                                <h5 class="fw-bold text-primary mb-0">24/7</h5>
+                                <small class="text-muted">Ad Analytics</small>
+                            </div>
+                            <div class="border-end"></div>
+                            <div>
+                                <h5 class="fw-bold text-primary mb-0">98%</h5>
+                                <small class="text-muted">Seller Rating</small>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- RIGHT COLUMN: Login Form Card -->
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="auth-card p-4 p-md-5">
+                        
+                        <!-- Already logged in notification banner -->
+                        <div id="alreadyLoggedInBanner" class="alert alert-info border-0 rounded-3 mb-4 d-none">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div>
+                                    <i class="fa-solid fa-user-check me-2 text-primary"></i>
+                                    <span>Logged in as: <strong id="loggedInUserName">User</strong></span>
+                                </div>
+                                <div class="d-flex gap-2">
+                                    <a href="index.html" class="btn btn-primary btn-xs py-1 px-2">Home</a>
+                                    <button class="btn btn-outline-danger btn-xs py-1 px-2" onclick="logoutUser()">Logout</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <h3 class="fw-bold text-body mb-1">Welcome Back</h3>
+                            <p class="text-muted small mb-0">Please enter your credentials to access your account.</p>
+                        </div>
+
+                        <!-- Dynamic Alert Box for Login Feedback -->
+                        <div id="loginAlert" class="alert d-none rounded-3 py-2 px-3 mb-3 small" role="alert"></div>
+
+                        <!-- 1-Click Quick Demo Login Chips -->
+                        <div class="mb-4 p-2.5 rounded-3 bg-body-tertiary border">
+                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                <span class="small fw-bold text-muted"><i class="fa-solid fa-bolt text-warning me-1"></i> Quick 1-Click Demo Login:</span>
+                            </div>
+                            <div class="d-flex flex-wrap gap-2">
+                                <button type="button" class="demo-chip" onclick="fillDemo('admin')">
+                                    <i class="fa-solid fa-shield-halved text-danger"></i> Admin
+                                </button>
+                                <button type="button" class="demo-chip" onclick="fillDemo('seller')">
+                                    <i class="fa-solid fa-store text-primary"></i> Advertiser / Dealer
+                                </button>
+                                <button type="button" class="demo-chip" onclick="fillDemo('member')">
+                                    <i class="fa-solid fa-user text-success"></i> Individual
+                                </button>
+                            </div>
+                        </div>
+
+                        <form id="loginForm" onsubmit="handleLoginSubmit(event)">
+                            <!-- Email, Phone, or Username -->
+                            <div class="mb-3">
+                                <label for="loginIdentifier" class="form-label fw-semibold small text-body">Email, Phone, or Username</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-body-tertiary border-end-0 text-muted"><i class="fa-regular fa-user"></i></span>
+                                    <input type="text" class="form-control bg-body-tertiary border-start-0" id="loginIdentifier" placeholder="name@example.com, 07X XXX XXXX, or admin" required>
+                                </div>
+                            </div>
+
+                            <!-- Password -->
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <label for="loginPassword" class="form-label fw-semibold small text-body mb-0">Password</label>
+                                    <a href="#" class="text-decoration-none small text-primary fw-semibold" data-bs-toggle="modal" data-bs-target="#forgotPasswordModal">Forgot Password?</a>
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-body-tertiary border-end-0 text-muted"><i class="fa-solid fa-lock"></i></span>
+                                    <input type="password" class="form-control bg-body-tertiary border-start-0 border-end-0" id="loginPassword" placeholder="••••••••" required>
+                                    <button class="btn password-toggle-btn border" type="button" onclick="togglePasswordVisibility('loginPassword', 'toggleLoginPassIcon')" id="toggleLoginPass">
+                                        <i class="fa-regular fa-eye" id="toggleLoginPassIcon"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Remember Me Checkbox -->
+                            <div class="mb-4 form-check">
+                                <input type="checkbox" class="form-check-input" id="rememberMe" checked>
+                                <label class="form-check-label small text-muted" for="rememberMe">Keep me logged in on this device</label>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <button type="submit" class="btn btn-primary w-100 py-2.5 fw-bold shadow-sm mb-3" id="loginSubmitBtn">
+                                <span>Log In to Account</span> <i class="fa-solid fa-arrow-right ms-1"></i>
+                            </button>
+
+                            <!-- Social Login Divider -->
+                            <div class="position-relative text-center my-4">
+                                <hr class="border-secondary-subtle">
+                                <span class="position-absolute top-50 start-50 translate-middle bg-body px-3 text-muted small">or continue with</span>
+                            </div>
+
+                            <!-- Social Buttons -->
+                            <div class="row g-2 mb-4">
+                                <div class="col-6">
+                                    <button type="button" class="btn btn-google w-100 py-2 d-flex align-items-center justify-content-center gap-2 shadow-sm rounded-3" data-bs-toggle="modal" data-bs-target="#googleOAuthModal">
+                                        <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17Z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.34 24 12 24Z"/><path fill="#FBBC05" d="M5.28 14.27A7.16 7.16 0 0 1 4.9 12c0-.79.14-1.57.38-2.27V6.58H1.25A11.96 11.96 0 0 0 0 12c0 1.92.45 3.74 1.25 5.42l4.03-3.15Z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.34 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98Z"/></svg>
+                                        <span class="small fw-semibold">Google</span>
+                                    </button>
+                                </div>
+                                <div class="col-6">
+                                    <button type="button" class="btn btn-facebook w-100 py-2 d-flex align-items-center justify-content-center gap-2 shadow-sm rounded-3" data-bs-toggle="modal" data-bs-target="#facebookOAuthModal">
+                                        <i class="fa-brands fa-facebook fs-6"></i>
+                                        <span class="small fw-semibold">Facebook</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Register CTA -->
+                            <p class="text-center text-muted small mb-0">
+                                New to go PAGEZ? 
+                                <a href="register.html" class="text-decoration-none fw-bold text-primary">Create Your Account</a>
+                            </p>
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Google OAuth Account Selection Modal -->
+    <div class="modal fade" id="googleOAuthModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content oauth-modal-content p-4">
+                <div class="d-flex align-items-center justify-content-between mb-3 border-bottom pb-3">
+                    <div class="d-flex align-items-center gap-2">
+                        <svg width="24" height="24" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17Z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.34 24 12 24Z"/><path fill="#FBBC05" d="M5.28 14.27A7.16 7.16 0 0 1 4.9 12c0-.79.14-1.57.38-2.27V6.58H1.25A11.96 11.96 0 0 0 0 12c0 1.92.45 3.74 1.25 5.42l4.03-3.15Z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.34 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98Z"/></svg>
+                        <h6 class="fw-bold mb-0 text-body">Sign in with Google</h6>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                
+                <p class="text-muted small mb-3">Choose an account to continue to <strong>go PAGEZ Marketplace</strong>:</p>
+
+                <!-- Accounts List -->
+                <div class="d-flex flex-column gap-2 mb-3">
+                    <div class="oauth-account-item" onclick="selectGoogleAccount('Kasun Perera', 'kasun.perera@gmail.com', 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&q=80')">
+                        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&q=80" alt="Kasun" class="oauth-avatar">
+                        <div class="flex-grow-1">
+                            <div class="fw-bold small text-body">Kasun Perera</div>
+                            <div class="text-muted" style="font-size:12px;">kasun.perera@gmail.com</div>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-muted small"></i>
+                    </div>
+
+                    <div class="oauth-account-item" onclick="selectGoogleAccount('Nuwan Silva', 'nuwan.silva92@gmail.com', 'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=120&q=80')">
+                        <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=120&q=80" alt="Nuwan" class="oauth-avatar">
+                        <div class="flex-grow-1">
+                            <div class="fw-bold small text-body">Nuwan Silva</div>
+                            <div class="text-muted" style="font-size:12px;">nuwan.silva92@gmail.com</div>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-muted small"></i>
+                    </div>
+
+                    <div class="oauth-account-item" onclick="toggleCustomGoogleInput()">
+                        <div class="oauth-avatar d-flex align-items-center justify-content-center bg-body-tertiary border text-muted">
+                            <i class="fa-solid fa-user-plus"></i>
+                        </div>
+                        <div class="flex-grow-1">
+                            <div class="fw-bold small text-body">Use another Google account</div>
+                            <div class="text-muted" style="font-size:12px;">Enter your Gmail address</div>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-muted small"></i>
+                    </div>
+                </div>
+
+                <!-- Custom Google Account input form -->
+                <div id="customGoogleInput" class="p-3 bg-body-tertiary rounded-3 border mb-3" style="display:none;">
+                    <label class="form-label small fw-bold text-body">Enter Google / Gmail Account</label>
+                    <div class="input-group mb-2">
+                        <input type="email" class="form-control form-control-sm bg-body" id="customGoogleEmail" placeholder="your.name@gmail.com">
+                        <button class="btn btn-primary btn-sm fw-bold px-3" type="button" onclick="submitCustomGoogle()">Continue</button>
+                    </div>
+                </div>
+
+                <div class="text-center text-muted" style="font-size:11px;">
+                    To continue, Google will share your name, email address, and profile picture with go PAGEZ. See our <a href="#" class="text-primary text-decoration-none">Privacy Policy</a>.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Facebook OAuth Modal -->
+    <div class="modal fade" id="facebookOAuthModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content oauth-modal-content p-4">
+                <div class="d-flex align-items-center justify-content-between mb-3 border-bottom pb-3">
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="fa-brands fa-facebook fs-4" style="color:#1877f2;"></i>
+                        <h6 class="fw-bold mb-0 text-body">Log in with Facebook</h6>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                
+                <div class="text-center my-3">
+                    <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=160&q=80" alt="FB Avatar" class="rounded-circle shadow-sm border p-1" style="width:72px; height:72px; object-fit:cover;">
+                    <h5 class="fw-bold text-body mt-2 mb-0">Kasun Perera</h5>
+                    <p class="text-muted small">kasun.perera@facebook.com</p>
+                </div>
+
+                <div class="p-3 bg-body-tertiary rounded-3 border mb-3 small text-muted">
+                    <div class="d-flex align-items-center gap-2 mb-1">
+                        <i class="fa-solid fa-circle-check text-success"></i>
+                        <span><strong>go PAGEZ</strong> will receive your name, profile picture, and email address.</span>
+                    </div>
+                </div>
+
+                <div class="d-flex flex-column gap-2 mb-2">
+                    <button type="button" class="btn btn-facebook py-2.5 fw-bold shadow-sm" onclick="selectFacebookAccount('Kasun Perera', 'kasun.perera@facebook.com')">
+                        <i class="fa-brands fa-facebook me-1"></i> Continue as Kasun
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary py-2 btn-sm" onclick="toggleCustomFbInput()">
+                        Log into another Facebook account
+                    </button>
+                </div>
+
+                <!-- Custom FB Input -->
+                <div id="customFbInput" class="p-3 bg-body-tertiary rounded-3 border my-3" style="display:none;">
+                    <label class="form-label small fw-bold text-body">Facebook Email or Phone</label>
+                    <div class="input-group mb-2">
+                        <input type="text" class="form-control form-control-sm bg-body" id="customFbEmail" placeholder="facebook.user@example.com">
+                        <button class="btn btn-primary btn-sm fw-bold px-3" type="button" onclick="submitCustomFb()">Log In</button>
+                    </div>
+                </div>
+
+                <div class="text-center text-muted mt-2" style="font-size:11px;">
+                    This does not let the app post to Facebook.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Google One-Tap Floating Widget -->
+    <div id="googleOneTapBox" class="google-onetap-box bg-body border p-3 rounded-4 shadow-lg" style="display:none;">
+        <div class="d-flex align-items-center justify-content-between mb-2">
+            <div class="d-flex align-items-center gap-2">
+                <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17Z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.34 24 12 24Z"/><path fill="#FBBC05" d="M5.28 14.27A7.16 7.16 0 0 1 4.9 12c0-.79.14-1.57.38-2.27V6.58H1.25A11.96 11.96 0 0 0 0 12c0 1.92.45 3.74 1.25 5.42l4.03-3.15Z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.34 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98Z"/></svg>
+                <span class="small fw-bold text-body">Sign in with Google</span>
+            </div>
+            <button type="button" class="btn-close btn-sm" style="font-size:10px;" onclick="closeGoogleOneTap()"></button>
+        </div>
+        <div class="d-flex align-items-center gap-2 p-2 rounded-3 bg-body-tertiary mb-2">
+            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=80&q=80" class="rounded-circle" style="width:34px; height:34px; object-fit:cover;">
+            <div class="overflow-hidden">
+                <div class="fw-bold small text-body text-truncate">Kasun Perera</div>
+                <div class="text-muted text-truncate" style="font-size:11px;">kasun.perera@gmail.com</div>
+            </div>
+        </div>
+        <button type="button" class="btn btn-primary btn-sm w-100 fw-bold py-1.5" onclick="selectGoogleAccount('Kasun Perera', 'kasun.perera@gmail.com', 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&q=80')">
+            Continue as Kasun
+        </button>
+    </div>
+
+    <!-- Forgot Password Modal -->
+    <div class="modal fade" id="forgotPasswordModal" tabindex="-1" aria-labelledby="forgotPasswordModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg rounded-4">
+                <div class="modal-header border-0 pb-0">
+                    <h5 class="modal-title fw-bold text-body" id="forgotPasswordModalLabel">
+                        <i class="fa-solid fa-key text-primary me-2"></i> Reset Password
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <p class="text-muted small mb-4">
+                        Enter your registered email address or mobile phone number. We will send you a verification code and reset link.
+                    </p>
+                    <div id="forgotAlert" class="alert d-none rounded-3 py-2 px-3 mb-3 small"></div>
+                    <form id="forgotPasswordForm" onsubmit="handleForgotPasswordSubmit(event)">
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold small">Registered Email or Phone</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-body-tertiary"><i class="fa-regular fa-envelope text-muted"></i></span>
+                                <input type="text" class="form-control bg-body-tertiary" id="resetIdentifier" placeholder="e.g. name@example.com or 0771234567" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 fw-bold py-2.5" id="resetSubmitBtn">
+                            <i class="fa-solid fa-paper-plane me-1"></i> Send Reset Link &amp; OTP
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-body-tertiary border-top py-3 mt-auto">
+        <div class="container text-center text-muted small">
+            &copy; 2026 go PAGEZ. All rights reserved. | <a href="#" class="text-muted text-decoration-none">Terms</a> | <a href="#" class="text-muted text-decoration-none">Privacy Policy</a>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- App JS -->
+    <script src="js/app.js"></script>
+    <!-- AOS Animation JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script>
+        // Initialize AOS animations
+        AOS.init({ duration: 700, once: true });
+
+        // Check if user is already logged in
+        document.addEventListener('DOMContentLoaded', () => {
+            initTheme();
+            checkExistingSession();
+            
+            // Show Google One-Tap after 1.2s if not logged in
+            const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
+            if (!currentUser) {
+                setTimeout(() => {
+                    const oneTap = document.getElementById('googleOneTapBox');
+                    if (oneTap) oneTap.style.display = 'block';
+                }, 1200);
+            }
+        });
+
+        function checkExistingSession() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
+            if (currentUser && currentUser.name) {
+                const banner = document.getElementById('alreadyLoggedInBanner');
+                if (banner) {
+                    banner.classList.remove('d-none');
+                    document.getElementById('loggedInUserName').textContent = `${currentUser.name} (${currentUser.role || 'Member'})`;
+                }
+            }
+        }
+
+        function closeGoogleOneTap() {
+            const oneTap = document.getElementById('googleOneTapBox');
+            if (oneTap) oneTap.style.display = 'none';
+        }
+
+        // Toggle Password Visibility
+        function togglePasswordVisibility(inputId, iconId) {
+            const input = document.getElementById(inputId);
+            const icon = document.getElementById(iconId);
+            if (!input || !icon) return;
+
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.className = 'fa-regular fa-eye-slash';
+            } else {
+                input.type = 'password';
+                icon.className = 'fa-regular fa-eye';
+            }
+        }
+
+        // Quick Demo Login Auto-fill
+        function fillDemo(type) {
+            const idInput = document.getElementById('loginIdentifier');
+            const passInput = document.getElementById('loginPassword');
+            
+            if (type === 'admin') {
+                idInput.value = 'admin';
+                passInput.value = '12345';
+            } else if (type === 'seller') {
+                idInput.value = 'seller@gopagez.lk';
+                passInput.value = '123456';
+            } else if (type === 'member') {
+                idInput.value = 'john@example.com';
+                passInput.value = '123456';
+            }
+
+            const alertBox = document.getElementById('loginAlert');
+            alertBox.className = 'alert alert-info rounded-3 py-2 px-3 mb-3 small d-block';
+            alertBox.innerHTML = `<i class="fa-solid fa-circle-info me-1"></i> Demo credentials loaded for <strong>${type.toUpperCase()}</strong>. Click "Log In" or submit to continue.`;
+        }
+
+        // Handle Login Submission
+        function handleLoginSubmit(event) {
+            event.preventDefault();
+            const identifier = document.getElementById('loginIdentifier').value.trim().toLowerCase();
+            const password = document.getElementById('loginPassword').value;
+            const alertBox = document.getElementById('loginAlert');
+            const submitBtn = document.getElementById('loginSubmitBtn');
+
+            if (!identifier || !password) {
+                showAlert(alertBox, 'danger', 'Please enter your email/phone and password.');
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Authenticating...';
+
+            setTimeout(() => {
+                const db = JSON.parse(localStorage.getItem('classifiedDB') || '{}');
+                const users = db.users || [
+                    { id: 1, name: 'Admin', email: 'admin@gopagez.lk', username: 'admin', password: '12345', role: 'Admin' }
+                ];
+
+                // Match by email, username, phone, or name
+                const user = users.find(u => {
+                    const emailMatch = u.email && u.email.toLowerCase() === identifier;
+                    const userMatch = (u.username && u.username.toLowerCase() === identifier) || (u.name && u.name.toLowerCase() === identifier);
+                    const phoneMatch = u.phone && u.phone.replace(/[^0-9]/g, '') === identifier.replace(/[^0-9]/g, '');
+                    return (emailMatch || userMatch || phoneMatch) && u.password === password;
+                });
+
+                // Fallback: check hardcoded admin default
+                let matchedUser = user;
+                if (!matchedUser && identifier === 'admin' && password === '12345') {
+                    matchedUser = { id: 1, name: 'Admin', username: 'admin', email: 'admin@gopagez.lk', role: 'Admin' };
+                }
+
+                if (matchedUser) {
+                    showAlert(alertBox, 'success', `<i class="fa-solid fa-circle-check me-1"></i> Welcome back, <strong>${matchedUser.name}</strong>! Redirecting...`);
+                    
+                    // Store user session
+                    localStorage.setItem('currentUser', JSON.stringify(matchedUser));
+                    if (matchedUser.role === 'Admin') {
+                        localStorage.setItem('adminLogin', 'true');
+                    }
+
+                    setTimeout(() => {
+                        const urlParams = new URLSearchParams(window.location.search);
+                        const redirect = urlParams.get('redirect');
+                        if (redirect) {
+                            window.location.href = redirect;
+                        } else if (matchedUser.role === 'Admin') {
+                            window.location.href = 'admin-panel.html';
+                        } else {
+                            window.location.href = 'index.html';
+                        }
+                    }, 900);
+
+                } else {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<span>Log In to Account</span> <i class="fa-solid fa-arrow-right ms-1"></i>';
+                    showAlert(alertBox, 'danger', '<i class="fa-solid fa-triangle-exclamation me-1"></i> Invalid email, username, or password. Please try again or use a Quick Demo button.');
+                }
+            }, 600);
+        }
+
+        // Google Account Selection Handler
+        function selectGoogleAccount(name, email, avatar) {
+            const modalEl = document.getElementById('googleOAuthModal');
+            if (modalEl) {
+                const modal = bootstrap.Modal.getInstance(modalEl);
+                if (modal) modal.hide();
+            }
+            closeGoogleOneTap();
+
+            const alertBox = document.getElementById('loginAlert');
+            showAlert(alertBox, 'info', `<i class="fa-solid fa-spinner fa-spin me-1"></i> Signing in with Google as <strong>${name}</strong>...`);
+
+            setTimeout(() => {
+                const googleUser = {
+                    id: Date.now(),
+                    name: name,
+                    email: email,
+                    username: email.split('@')[0],
+                    role: 'Member',
+                    accountType: 'personal',
+                    provider: 'Google',
+                    avatar: avatar || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&q=80',
+                    createdAt: new Date().toISOString()
+                };
+
+                // Sync to classifiedDB users
+                const db = JSON.parse(localStorage.getItem('classifiedDB') || '{"users":[]}');
+                if (!db.users) db.users = [];
+                if (!db.users.some(u => u.email === email)) {
+                    db.users.push(googleUser);
+                    localStorage.setItem('classifiedDB', JSON.stringify(db));
+                }
+
+                localStorage.setItem('currentUser', JSON.stringify(googleUser));
+                showAlert(alertBox, 'success', `<i class="fa-solid fa-circle-check me-1"></i> Signed in successfully with Google! Welcome, <strong>${name}</strong>.`);
+                
+                setTimeout(() => {
+                    const urlParams = new URLSearchParams(window.location.search);
+                    window.location.href = urlParams.get('redirect') || 'index.html';
+                }, 800);
+            }, 700);
+        }
+
+        function toggleCustomGoogleInput() {
+            const el = document.getElementById('customGoogleInput');
+            el.style.display = el.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function submitCustomGoogle() {
+            const email = document.getElementById('customGoogleEmail').value.trim();
+            if (!email || !email.includes('@')) {
+                alert('Please enter a valid Google email address.');
+                return;
+            }
+            const name = email.split('@')[0].replace(/[._-]/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+            selectGoogleAccount(name, email, 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&q=80');
+        }
+
+        // Facebook Account Selection Handler
+        function selectFacebookAccount(name, email) {
+            const modalEl = document.getElementById('facebookOAuthModal');
+            if (modalEl) {
+                const modal = bootstrap.Modal.getInstance(modalEl);
+                if (modal) modal.hide();
+            }
+
+            const alertBox = document.getElementById('loginAlert');
+            showAlert(alertBox, 'info', `<i class="fa-solid fa-spinner fa-spin me-1"></i> Connecting with Facebook as <strong>${name}</strong>...`);
+
+            setTimeout(() => {
+                const fbUser = {
+                    id: Date.now(),
+                    name: name,
+                    email: email,
+                    username: email.split('@')[0],
+                    role: 'Member',
+                    accountType: 'personal',
+                    provider: 'Facebook',
+                    avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&q=80',
+                    createdAt: new Date().toISOString()
+                };
+
+                const db = JSON.parse(localStorage.getItem('classifiedDB') || '{"users":[]}');
+                if (!db.users) db.users = [];
+                if (!db.users.some(u => u.email === email)) {
+                    db.users.push(fbUser);
+                    localStorage.setItem('classifiedDB', JSON.stringify(db));
+                }
+
+                localStorage.setItem('currentUser', JSON.stringify(fbUser));
+                showAlert(alertBox, 'success', `<i class="fa-solid fa-circle-check me-1"></i> Connected with Facebook! Welcome, <strong>${name}</strong>.`);
+                
+                setTimeout(() => {
+                    const urlParams = new URLSearchParams(window.location.search);
+                    window.location.href = urlParams.get('redirect') || 'index.html';
+                }, 800);
+            }, 700);
+        }
+
+        function toggleCustomFbInput() {
+            const el = document.getElementById('customFbInput');
+            el.style.display = el.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function submitCustomFb() {
+            const email = document.getElementById('customFbEmail').value.trim();
+            if (!email) {
+                alert('Please enter your Facebook email or phone number.');
+                return;
+            }
+            const name = email.includes('@') ? email.split('@')[0].replace(/[._-]/g, ' ') : 'Facebook User';
+            selectFacebookAccount(name, email);
+        }
+
+        // Handle Forgot Password
+        function handleForgotPasswordSubmit(event) {
+            event.preventDefault();
+            const identifier = document.getElementById('resetIdentifier').value.trim();
+            const alertBox = document.getElementById('forgotAlert');
+            const submitBtn = document.getElementById('resetSubmitBtn');
+
+            if (!identifier) return;
+
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span> Generating OTP...';
+
+            setTimeout(() => {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane me-1"></i> Send Reset Link & OTP';
+                const dummyOtp = Math.floor(100000 + Math.random() * 900000);
+                showAlert(alertBox, 'success', `<i class="fa-solid fa-circle-check me-1"></i> Password reset link and OTP <strong>${dummyOtp}</strong> sent to <strong>${identifier}</strong>! (Simulated)`);
+            }, 700);
+        }
+
+        // Show Alert Helper
+        function showAlert(box, type, html) {
+            box.className = `alert alert-${type} rounded-3 py-2 px-3 mb-3 small d-block`;
+            box.innerHTML = html;
+        }
+
+        // Logout user
+        function logoutUser() {
+            localStorage.removeItem('currentUser');
+            localStorage.removeItem('adminLogin');
+            window.location.reload();
+        }
+    </script>
+</body>
+</html>
