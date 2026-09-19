@@ -1445,6 +1445,11 @@ td img { border-radius: 6px; object-fit: cover; }
                             </select>
                         </div>
                     </div>
+
+                    <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:24px; padding-top:16px; border-top:1px solid var(--border);">
+                        <button class="btn btn-ghost" onclick="resetSiteCustomConfig()"><i class="fa-solid fa-rotate-left"></i> Reset Defaults</button>
+                        <button class="btn btn-primary" onclick="saveSiteCustomConfig()"><i class="fa-solid fa-floppy-disk"></i> Save &amp; Publish Live</button>
+                    </div>
                 </div>
             </div>
 
@@ -1700,6 +1705,11 @@ td img { border-radius: 6px; object-fit: cover; }
                             </label>
                         </div>
                     </div>
+
+                    <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:24px; padding-top:16px; border-top:1px solid var(--border);">
+                        <button class="btn btn-ghost" onclick="resetSiteCustomConfig()"><i class="fa-solid fa-rotate-left"></i> Reset Defaults</button>
+                        <button class="btn btn-primary" onclick="saveSiteCustomConfig()"><i class="fa-solid fa-floppy-disk"></i> Save &amp; Publish Live</button>
+                    </div>
                 </div>
             </div>
 
@@ -1746,6 +1756,11 @@ td img { border-radius: 6px; object-fit: cover; }
                             </div>
                         </div>
                     </div>
+
+                    <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:24px; padding-top:16px; border-top:1px solid var(--border);">
+                        <button class="btn btn-ghost" onclick="resetSiteCustomConfig()"><i class="fa-solid fa-rotate-left"></i> Reset Defaults</button>
+                        <button class="btn btn-primary" onclick="saveSiteCustomConfig()"><i class="fa-solid fa-floppy-disk"></i> Save &amp; Publish Live</button>
+                    </div>
                 </div>
             </div>
 
@@ -1768,21 +1783,21 @@ td img { border-radius: 6px; object-fit: cover; }
 
                     <div class="form-row">
                         <div class="form-group">
-                            <label>Official Support Email</label>
-                            <input id="cfgContactEmail" placeholder="support@gopagez.lk">
+                            <label>Customer Support Email</label>
+                            <input id="cfgContactEmail" placeholder="support@gopagez.com">
                         </div>
                         <div class="form-group">
-                            <label>Operating / Support Hours</label>
-                            <input id="cfgWorkingHours" placeholder="Monday - Saturday: 8:30 AM - 6:00 PM">
+                            <label>Office Working Hours</label>
+                            <input id="cfgWorkingHours" placeholder="Mon - Sat: 8:30 AM - 6:00 PM">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label>Office / Showroom Physical Address</label>
-                        <input id="cfgContactAddress" placeholder="124 Galle Road, Colombo 03, Sri Lanka">
+                        <label>Office Headquarters Address</label>
+                        <input id="cfgContactAddress" placeholder="Level 12, West Tower, World Trade Center, Colombo 01, Sri Lanka">
                     </div>
 
-                    <div class="section-title">Social Media Links</div>
+                    <div class="section-title">Official Social Media Profiles</div>
 
                     <div class="form-row">
                         <div class="form-group">
@@ -1810,6 +1825,11 @@ td img { border-radius: 6px; object-fit: cover; }
                         <span><i class="fa-brands fa-whatsapp text-success me-2"></i> Enable Direct Floating WhatsApp Support Button on Website</span>
                         <div class="switch-toggle"><input type="checkbox" id="cfgEnableFloatingWa" checked><span class="switch-slider"></span></div>
                     </label>
+
+                    <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:24px; padding-top:16px; border-top:1px solid var(--border);">
+                        <button class="btn btn-ghost" onclick="resetSiteCustomConfig()"><i class="fa-solid fa-rotate-left"></i> Reset Defaults</button>
+                        <button class="btn btn-primary" onclick="saveSiteCustomConfig()"><i class="fa-solid fa-floppy-disk"></i> Save &amp; Publish Live</button>
+                    </div>
                 </div>
             </div>
 
@@ -1875,6 +1895,11 @@ td img { border-radius: 6px; object-fit: cover; }
                         <span><i class="fa-solid fa-stamp me-2 text-warning"></i> Auto-Apply Watermark ("go PAGEZ") on Uploaded Images</span>
                         <div class="switch-toggle"><input type="checkbox" id="cfgEnableWatermark" checked><span class="switch-slider"></span></div>
                     </label>
+
+                    <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:24px; padding-top:16px; border-top:1px solid var(--border);">
+                        <button class="btn btn-ghost" onclick="resetSiteCustomConfig()"><i class="fa-solid fa-rotate-left"></i> Reset Defaults</button>
+                        <button class="btn btn-primary" onclick="saveSiteCustomConfig()"><i class="fa-solid fa-floppy-disk"></i> Save &amp; Publish Live</button>
+                    </div>
                 </div>
             </div>
 
@@ -1920,6 +1945,11 @@ td img { border-radius: 6px; object-fit: cover; }
                             <button class="btn btn-ghost btn-xs" onclick="simulateApiCall('banners')"><i class="fa-solid fa-play"></i> Test Endpoint</button>
                         </div>
                         <div id="apiResponseBox" class="code-editor-box" style="display:none; max-height:160px; overflow-y:auto; margin-top:10px;"></div>
+                    </div>
+
+                    <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:24px; padding-top:16px; border-top:1px solid var(--border);">
+                        <button class="btn btn-ghost" onclick="resetSiteCustomConfig()"><i class="fa-solid fa-rotate-left"></i> Reset Defaults</button>
+                        <button class="btn btn-primary" onclick="saveSiteCustomConfig()"><i class="fa-solid fa-floppy-disk"></i> Save &amp; Publish Live</button>
                     </div>
                 </div>
             </div>
@@ -5010,9 +5040,28 @@ function restoreDbFromFile(input) {
         reader.onload = e => {
             try {
                 const data = JSON.parse(e.target.result);
-                setDB(data);
+                if (data.siteCustomConfig) {
+                    localStorage.setItem('siteCustomConfig', JSON.stringify(data.siteCustomConfig));
+                }
+                if (data.classifiedDB) {
+                    setDB(data.classifiedDB);
+                } else if (data.ads || data.categories) {
+                    setDB(data);
+                }
+                if (data.publishedAds) {
+                    localStorage.setItem('publishedAds', JSON.stringify(data.publishedAds));
+                }
+                if (data.adminSettings) {
+                    localStorage.setItem('adminSettings', JSON.stringify(data.adminSettings));
+                }
+                if (data.goPagezTheme) {
+                    localStorage.setItem('goPagezTheme', data.goPagezTheme);
+                    localStorage.setItem('cpTheme', data.goPagezTheme);
+                }
                 loadSiteCustomizer();
-                alert('🎉 Database successfully restored from backup file!');
+                updateStorageStats();
+                addActivity('System restored successfully from backup JSON.');
+                alert('🎉 Full Website Configuration & Database successfully restored from backup file!');
             } catch(err) {
                 alert('❌ Error reading backup file: ' + err.message);
             }
@@ -5294,12 +5343,23 @@ function resetSiteCustomConfig() {
 }
 
 function exportSiteConfig() {
-    const config = getSiteCustomConfig();
-    const blob = new Blob([JSON.stringify(config, null, 2)], { type: 'application/json' });
+    const fullBackup = {
+        _meta: {
+            system: 'go PAGEZ Enterprise Marketplace',
+            version: '2.0',
+            exportedAt: new Date().toISOString()
+        },
+        siteCustomConfig: getSiteCustomConfig(),
+        classifiedDB: getDB(),
+        publishedAds: JSON.parse(localStorage.getItem('publishedAds') || '[]'),
+        adminSettings: JSON.parse(localStorage.getItem('adminSettings') || '{}'),
+        goPagezTheme: localStorage.getItem('goPagezTheme') || 'light'
+    };
+    const blob = new Blob([JSON.stringify(fullBackup, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `goPagez_enterprise_config_${new Date().toISOString().slice(0, 10)}.json`;
+    a.download = `goPagez_full_backup_${new Date().toISOString().slice(0, 10)}.json`;
     a.click();
     URL.revokeObjectURL(url);
 }
